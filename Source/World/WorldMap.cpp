@@ -13,8 +13,8 @@ void WorldMap::load(std::string filename) {
     }
     char c;
     int spaces = 0;
-    int current_height = 0;
-    int square_height = 0;
+    int newlines = 1;
+    int square_height = -2;
     int square_width = 0;
     int block_width = 0;
     std::string line;
@@ -22,31 +22,28 @@ void WorldMap::load(std::string filename) {
     mapFile.clear();
     mapFile.seekg(0, mapFile.beg);
     std::getline(mapFile, line);
-    for (; square_width < line.size(); ++square_width);
+    square_width = static_cast<int>(line.size());
     float real_width = static_cast<float>(config.width) / square_width;
     float real_height = static_cast<float>(config.height) / square_height;
     bool eof = false;
 
     while (mapFile >> std::noskipws >> c && !eof) {
-        if (c == ' ') {
-            ++spaces;
-        }
-        else if (c == '\n') {
-            spaces = 0;
-            ++current_height;
-        }
-        else if (c == '[' || c == '-') {
-            if (c == '[') block_width = 0;
+        if (c == ' ' || c == '\n') {
+            if (block_width > 0) {
+                Block block;
+                block.size = {block_width * real_width, real_height};
+                block.position = {spaces * real_width, (newlines - 1) * real_height};
+                m_blocks.push_back(block);
+                spaces += block_width;
+                block_width = 0;
+            }
+            if (c == '\n') {
+                spaces = 0;
+                ++newlines;
+            } else ++spaces;
+        } else if (c == 'x') {
             ++block_width;
-        }
-        else if (c == ']') {
-            Block block;
-            block.size = {block_width * real_width, real_height};
-            block.position = {spaces * real_width, current_height * real_height};
-            m_blocks.push_back(block);
-            spaces += block_width + 1;
-        }
-        else if (c == '_') {
+        } else if (c == '-') {
             eof = true;
         }
     }
