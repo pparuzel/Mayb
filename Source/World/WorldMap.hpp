@@ -15,6 +15,8 @@ public:
     WorldMap(const Config&);
 
     void load(std::string filename);
+
+    std::vector<Block>& blocks();
 };
 
 

@@ -6,12 +6,13 @@
 #include "WorldMap.hpp"
 
 class World {
+    WorldMap m_map;
 public:
-    World();
+    World(const Config&);
 
-    void generate(WorldMap);
+    void generate();
 
-    void render(RenderManager& );
+    void render(const RenderManager& );
 };
 
 
