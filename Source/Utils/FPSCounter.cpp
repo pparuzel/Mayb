@@ -23,7 +23,7 @@ void FPSCounter::update() {
 
 void FPSCounter::draw(const RenderManager& renderer) {
     std::stringstream ss;
-    ss << std::fixed << std::setprecision(10) << m_fps;
+    ss << std::fixed << std::setprecision(2) << m_fps;
     m_text.setString("FPS: " + ss.str());
     renderer.drawSFML(m_text);
 }
