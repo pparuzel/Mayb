@@ -12,8 +12,7 @@ protected:
     Vector2 velocity;
     Collider collision_box;
 public:
-    Entity(Vector2 pos={0, 0}, Vector2 vel={0, 0}, Collider box={0, 0, 0, 0})
-            : position(pos), velocity(vel), collision_box(box) {}
+    Entity(Collider box, Vector2 pos={0, 0}, Vector2 vel={0, 0});
 
     virtual ~Entity() = 0;
 };
