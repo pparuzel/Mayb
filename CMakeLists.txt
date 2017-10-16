@@ -21,6 +21,12 @@ set(SOURCE_FILES
         Source/Scenes/Scene.hpp
         Source/Scenes/MenuScene.cpp
         Source/Scenes/MenuScene.hpp
+        Source/World/World.cpp
+        Source/World/World.hpp
+        Source/World/WorldMap.cpp
+        Source/World/WorldMap.hpp
+        Source/World/Blocks/Block.cpp
+        Source/World/Blocks/Block.hpp
         )
 add_executable(MaybSFML ${SOURCE_FILES})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
