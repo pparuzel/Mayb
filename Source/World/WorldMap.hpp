@@ -16,6 +16,8 @@ public:
 
     void load(std::string filename);
 
+    void reload(std::string filename);
+
     std::vector<Block>& blocks();
 };
 

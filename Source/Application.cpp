@@ -21,6 +21,10 @@ void Application::run() {
         handleEvents();
         m_fpsCounter.update();
         // Scene handling
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            m_scene->generate();
+        }
+
 
         m_window.clear(sf::Color::Black);
         m_scene->render(m_renderer);

@@ -10,7 +10,7 @@ class World {
 public:
     World(const Config&);
 
-    void generate();
+    void generate(std::string );
 
     void render(const RenderManager& );
 };

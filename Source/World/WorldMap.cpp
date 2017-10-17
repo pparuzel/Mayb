@@ -54,3 +54,8 @@ void WorldMap::load(std::string filename) {
 std::vector<Block>& WorldMap::blocks() {
     return m_blocks;
 }
+
+void WorldMap::reload(std::string filename) {
+    m_blocks.clear();
+    load(filename);
+}
