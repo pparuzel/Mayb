@@ -1,10 +1,7 @@
 #include "MenuScene.hpp"
-#include "../Rendering/RenderManager.hpp"
 
-void MenuScene::generate() {
+MenuScene::MenuScene(const Config& config) {}
 
-}
+void MenuScene::render(const RenderManager& manager) {}
 
-void MenuScene::render(const RenderManager& manager) {
-
-}
+void MenuScene::generate() {}

@@ -13,6 +13,7 @@ class Application {
     RenderManager m_renderer;
     FPSCounter m_fpsCounter;
     std::unique_ptr<Scene> m_scene;
+    const Config& m_config;
 public:
     Application(const Config&);
 
