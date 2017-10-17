@@ -1,10 +1,10 @@
-#include "WorldMap.hpp"
+#include "WorldLoader.hpp"
 
 
-WorldMap::WorldMap(const Config& config_ref)
-        : m_blocks(), config(config_ref) {}
+WorldLoader::WorldLoader(const Config& config_ref)
+        : m_blocks(), m_entities(), config(config_ref) {}
 
-void WorldMap::load(std::string filename) {
+void WorldLoader::load(std::string filename) {
     std::ifstream mapFile(filename);
 
     if(!mapFile.is_open()) {
@@ -51,11 +51,7 @@ void WorldMap::load(std::string filename) {
     mapFile.close();
 }
 
-std::vector<Block>& WorldMap::blocks() {
-    return m_blocks;
-}
-
-void WorldMap::reload(std::string filename) {
+void WorldLoader::reload(std::string filename) {
     m_blocks.clear();
     load(filename);
 }

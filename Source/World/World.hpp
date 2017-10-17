@@ -3,14 +3,13 @@
 
 
 #include "../Rendering/RenderManager.hpp"
-#include "WorldMap.hpp"
+#include "WorldLoader.hpp"
 
-class World {
-    WorldMap m_map;
+class World : public WorldLoader {
 public:
     World(const Config&);
 
-    void generate(std::string );
+    void generate();
 
     void render(const RenderManager& );
 };

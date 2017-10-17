@@ -23,8 +23,8 @@ set(SOURCE_FILES
         Source/Scenes/MenuScene.hpp
         Source/World/World.cpp
         Source/World/World.hpp
-        Source/World/WorldMap.cpp
-        Source/World/WorldMap.hpp
+        Source/World/WorldLoader.cpp
+        Source/World/WorldLoader.hpp
         Source/World/Blocks/Block.cpp
         Source/World/Blocks/Block.hpp
         Source/Scenes/GameScene.cpp
