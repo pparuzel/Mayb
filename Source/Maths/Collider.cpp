@@ -1,4 +1,4 @@
 #include "Collider.hpp"
 
-Collider::Collider(const Vector2& position_ref, const Vector2& size_ref)
-        : bodyPosition(position_ref), bodySize(size_ref) {}
+Collider::Collider(Vector2 position, Vector2 size)
+        : m_position(position), m_size(size) {}

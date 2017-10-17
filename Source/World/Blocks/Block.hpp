@@ -11,7 +11,6 @@ struct Block : public Collider {
 
     Block(float width=0.f, float height=0.f);
 
-//    virtual ~Block() = 0;
 };
 
 

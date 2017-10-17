@@ -10,11 +10,10 @@ class Entity {
 protected:
     Vector2 position;
     Vector2 velocity;
-    Collider collision_box;
+    Collider bounding_box;
 public:
-    Entity(Collider box, Vector2 pos={0, 0}, Vector2 vel={0, 0});
+    Entity(Vector2 pos={0, 0}, Vector2 vel={0, 0}, Vector2 size={0, 0});
 
-    virtual ~Entity() = 0;
 };
 
 

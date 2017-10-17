@@ -1,4 +1,4 @@
 #include "Entity.hpp"
 
-Entity::Entity(Collider box, Vector2 pos, Vector2 vel)
-        : position(pos), velocity(vel), collision_box(box) {}
+Entity::Entity(Vector2 pos, Vector2 vel, Vector2 size)
+        : position(pos), velocity(vel), bounding_box(position, size) {}

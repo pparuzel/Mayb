@@ -5,10 +5,10 @@
 #include "Vector2.hpp"
 
 class Collider {
-    const Vector2& bodyPosition;
-    const Vector2& bodySize;
+    Vector2 m_position;
+    Vector2 m_size;
 public:
-    Collider(const Vector2& position_ref, const Vector2& size_ref);
+    Collider(Vector2 position, Vector2 size);
 };
 
 

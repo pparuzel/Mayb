@@ -8,6 +8,8 @@
 class Player : public Entity {
 
 public:
+    Player();
+
     void handleKeyboardInput();
 };
 
