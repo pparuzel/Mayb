@@ -13,6 +13,8 @@ public:
     void drawSFML(const sf::Drawable& drawable) const;
 
     void drawBlock(const Block& block) const;
+
+    void drawEntity(const Entity &entity) const;
 };
 
 

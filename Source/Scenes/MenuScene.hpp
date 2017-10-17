@@ -10,7 +10,7 @@ class MenuScene : public Scene {
 public:
     MenuScene(const Config& );
 
-    void generate() override;
+    void update() override;
 
     void render(const RenderManager& ) override;
 };

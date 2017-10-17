@@ -4,15 +4,20 @@
 
 #include "Scene.hpp"
 #include "../World/World.hpp"
+#include "../Player/Player.hpp"
+#include "../Utils/FPSCounter.hpp"
 
 class GameScene : public Scene {
     World m_world;
+    Player m_player;
+    const FPSCounter& m_counter;
 public:
-    GameScene(const Config&);
+    GameScene(const Config&, const FPSCounter& );
 
-    void generate() override;
+    void update() override;
 
     void render(const RenderManager& renderer) override;
+
 };
 
 

@@ -14,6 +14,7 @@ protected:
 public:
     Entity(Vector2 pos={0, 0}, Vector2 vel={0, 0}, Vector2 size={0, 0});
 
+    const Vector2& getPosition() const;
 };
 
 

@@ -5,7 +5,7 @@
 #include "../Rendering/RenderManager.hpp"
 
 struct Scene {
-    virtual void generate() = 0;
+    virtual void update() = 0;
     virtual void render(const RenderManager&) = 0;
 };
 

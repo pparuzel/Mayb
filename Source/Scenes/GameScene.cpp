@@ -1,11 +1,13 @@
 #include "GameScene.hpp"
 
-GameScene::GameScene(const Config& config) : m_world(config) {}
+GameScene::GameScene(const Config& config, const FPSCounter& fpsCounter)
+        : m_world(config), m_counter(fpsCounter) {}
 
-void GameScene::generate() {
-    m_world.generate("../Resources/Maps/map2");
+void GameScene::update() {
+    m_player.update(m_counter.frametime());
 }
 
 void GameScene::render(const RenderManager& renderer) {
     m_world.render(renderer);
+    m_player.draw(renderer);
 }

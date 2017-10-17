@@ -11,3 +11,10 @@ void RenderManager::drawBlock(const Block& block) const {
     rect.setPosition(block.position.toSFML());
     m_window.draw(rect);
 }
+
+void RenderManager::drawEntity(const Entity& entity) const {
+    sf::RectangleShape rect({50, 100});
+    rect.setFillColor(sf::Color::Blue);
+    rect.setPosition(entity.getPosition().toSFML());
+    m_window.draw(rect);
+}

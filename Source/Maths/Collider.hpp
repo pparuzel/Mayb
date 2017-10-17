@@ -9,6 +9,10 @@ class Collider {
     Vector2 m_size;
 public:
     Collider(Vector2 position, Vector2 size);
+
+    void detectCollision() const;
+
+    void resolveCollision() const;
 };
 
 

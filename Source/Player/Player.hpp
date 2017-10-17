@@ -4,13 +4,18 @@
 
 #include <SFML/Graphics.hpp>
 #include "../Entity.hpp"
+#include "../Rendering/RenderManager.hpp"
 
 class Player : public Entity {
 
 public:
     Player();
 
-    void handleKeyboardInput();
+    void handleKeyboardInput(float );
+
+    void update(float );
+
+    void draw(const RenderManager&);
 };
 
 

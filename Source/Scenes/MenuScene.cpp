@@ -4,4 +4,4 @@ MenuScene::MenuScene(const Config& config) {}
 
 void MenuScene::render(const RenderManager& manager) {}
 
-void MenuScene::generate() {}
+void MenuScene::update() {}
