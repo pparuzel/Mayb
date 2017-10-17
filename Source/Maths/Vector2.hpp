@@ -12,6 +12,13 @@ struct Vector2 {
 
     sf::Vector2f toSFML() const;
 
+    Vector2 operator+(const Vector2& );
+
+    Vector2 operator+(float );
+
+    Vector2& operator+=(const Vector2& );
+
+    Vector2 operator*(float );
 };
 
 
