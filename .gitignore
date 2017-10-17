@@ -1,7 +1,4 @@
 # CLion files
-MaybSFML.iml
-misc.xml
-modules.xml
-Project_Default.xml
-reconn.xml
-vcs.xml
+.idea/
+Future/
+cmake-build-debug/
