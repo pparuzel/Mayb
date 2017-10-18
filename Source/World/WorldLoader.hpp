@@ -9,8 +9,6 @@
 #include "../Config.hpp"
 #include "../Entity.hpp"
 
-class Block;
-class Entity;
 
 class WorldLoader {
 protected:
