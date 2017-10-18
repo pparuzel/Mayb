@@ -3,7 +3,7 @@
 
 
 #include "../../Maths/Vector2.hpp"
-#include "../../Entity.hpp"
+#include "../../Maths/Collider.hpp"
 
 struct Block : public Collider {
     Vector2 position;

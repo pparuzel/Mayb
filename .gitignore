@@ -2,3 +2,4 @@
 .idea/
 Future/
 cmake-build-debug/
+/Doxyfile

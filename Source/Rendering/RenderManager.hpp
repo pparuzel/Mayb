@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "../World/Blocks/Block.hpp"
+#include "../Entity.hpp"
+
 
 class RenderManager {
     sf::RenderWindow& m_window;
@@ -14,7 +16,7 @@ public:
 
     void drawBlock(const Block& block) const;
 
-    void drawEntity(const Entity &entity) const;
+    void drawEntity(const Entity& entity) const;
 };
 
 

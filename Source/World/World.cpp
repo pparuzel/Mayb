@@ -13,3 +13,11 @@ void World::render(const RenderManager& renderer) {
         renderer.drawBlock(block);
     }
 }
+
+void World::detectCollision() {
+    for (Entity& ent : m_entities) {
+        for (const Block& blk : m_blocks) {
+            ent.bounding_box.detectCollision(blk);
+        }
+    }
+}

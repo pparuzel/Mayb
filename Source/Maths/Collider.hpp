@@ -5,14 +5,14 @@
 #include "Vector2.hpp"
 
 class Collider {
-    Vector2 m_position;
+    const Vector2& m_position;
     Vector2 m_size;
 public:
-    Collider(Vector2 position, Vector2 size);
+    Collider(const Vector2& position, Vector2 size);
 
-    void detectCollision() const;
+    void detectCollision(const Collider& collider);
 
-    void resolveCollision() const;
+    void resolveCollision(const Collider& );
 };
 
 

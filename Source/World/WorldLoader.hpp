@@ -1,5 +1,5 @@
-#ifndef MAYBSFML_WORLDMAP_HPP
-#define MAYBSFML_WORLDMAP_HPP
+#ifndef MAYBSFML_WORLDLOADER_HPP
+#define MAYBSFML_WORLDLOADER_HPP
 
 
 #include <iostream>
@@ -8,6 +8,9 @@
 #include "Blocks/Block.hpp"
 #include "../Config.hpp"
 #include "../Entity.hpp"
+
+class Block;
+class Entity;
 
 class WorldLoader {
 protected:
@@ -23,4 +26,4 @@ public:
 };
 
 
-#endif //MAYBSFML_WORLDMAP_HPP
+#endif //MAYBSFML_WORLDLOADER_HPP

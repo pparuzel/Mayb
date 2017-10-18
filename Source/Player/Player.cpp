@@ -26,7 +26,7 @@ void Player::handleKeyboardInput(float dt) {
 
 void Player::update(float dt) {
     handleKeyboardInput(dt);
-    velocity.y += accel * dt; // gravitational pull
+//    velocity.y += accel * dt; // gravitational pull
     position += velocity * dt;
 }
 

@@ -2,8 +2,9 @@
 #define MAYBSFML_WORLD_HPP
 
 
-#include "../Rendering/RenderManager.hpp"
+#include "../Config.hpp"
 #include "WorldLoader.hpp"
+#include "../Rendering/RenderManager.hpp"
 
 class World : public WorldLoader {
 public:
@@ -12,6 +13,8 @@ public:
     void generate();
 
     void render(const RenderManager& );
+
+    void detectCollision();
 };
 
 
