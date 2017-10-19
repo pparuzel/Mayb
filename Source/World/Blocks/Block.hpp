@@ -5,12 +5,12 @@
 #include "../../Maths/Vector2.hpp"
 #include "../../Maths/Collider.hpp"
 
-struct Block : public Collider {
+struct Block {
     Vector2 position;
     Vector2 size;
+    Collider bounding_box;
 
-    Block(float width=0.f, float height=0.f);
-
+    Block();
 };
 
 

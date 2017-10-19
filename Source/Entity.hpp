@@ -8,15 +8,17 @@
 
 
 class Entity {
-protected:
+public:
     Vector2 position;
     Vector2 velocity;
+    Vector2 size;
     Collider bounding_box;
-    friend class World;
-public:
-    Entity(Vector2 pos={0, 0}, Vector2 vel={0, 0}, Vector2 size={0, 0});
 
-    const Vector2& getPosition() const;
+    Entity(Vector2 size_, Vector2 pos={0, 0}, Vector2 vel={0, 0});
+
+    Collider& getCollider();
+
+    void resolveCollision(COLLISION_TYPE );
 };
 
 

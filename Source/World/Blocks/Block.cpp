@@ -1,4 +1,5 @@
+#include <iostream>
 #include "Block.hpp"
 
-Block::Block(float width, float height)
-        : size{width, height}, position{0, 0}, Collider(position, {width, height}) {}
+Block::Block()
+        : size{100.f, 100.f}, position{0.f, 0.f}, bounding_box(position, size) {}

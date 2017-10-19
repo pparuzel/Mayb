@@ -4,15 +4,22 @@
 
 #include "Vector2.hpp"
 
+enum class COLLISION_TYPE {
+    NO_COLLISION = 0,
+    HORIZONTAL = 1,
+    VERTICAL = 2,
+    BOTH = 3
+};
+
 class Collider {
-    const Vector2& m_position;
-    Vector2 m_size;
+    Vector2& m_position;
+    const Vector2& m_size;
 public:
-    Collider(const Vector2& position, Vector2 size);
+    Collider(const Collider& );
 
-    void detectCollision(const Collider& collider);
+    Collider(Vector2& position, const Vector2& size);
 
-    void resolveCollision(const Collider& );
+    COLLISION_TYPE detectCollision(const Collider& , Vector2 );
 };
 
 

@@ -13,8 +13,8 @@ void RenderManager::drawBlock(const Block& block) const {
 }
 
 void RenderManager::drawEntity(const Entity& entity) const {
-    sf::RectangleShape rect({50, 100});
+    sf::RectangleShape rect(entity.size.toSFML());
     rect.setFillColor(sf::Color::Blue);
-    rect.setPosition(entity.getPosition().toSFML());
+    rect.setPosition(entity.position.toSFML());
     m_window.draw(rect);
 }

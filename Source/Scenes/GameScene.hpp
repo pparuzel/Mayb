@@ -9,7 +9,6 @@
 
 class GameScene : public Scene {
     World m_world;
-    Player m_player;
     const FPSCounter& m_counter;
 public:
     GameScene(const Config&, const FPSCounter& );

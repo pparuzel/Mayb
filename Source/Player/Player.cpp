@@ -1,9 +1,9 @@
 #include "Player.hpp"
 
 Player::Player()
-        : Entity() {}
+        : Entity{{50.f, 100.f}} {}
 
-float accel = .01f;
+float accel = .001f;
 
 int sgn(float x) {
     if (x == 0) return 0;
@@ -26,8 +26,11 @@ void Player::handleKeyboardInput(float dt) {
 
 void Player::update(float dt) {
     handleKeyboardInput(dt);
-//    velocity.y += accel * dt; // gravitational pull
-    position += velocity * dt;
+    velocity.y += accel * dt / 10; // gravitational pull
+}
+
+void Player::move() {
+    position += velocity;
 }
 
 void Player::draw(const RenderManager& renderer) {

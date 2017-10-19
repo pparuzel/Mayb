@@ -1,10 +1,9 @@
 #include "WorldLoader.hpp"
 
-
 WorldLoader::WorldLoader(const Config& config_ref)
-        : m_blocks(), m_entities(), config(config_ref) {}
+        : m_entities(), config(config_ref) {}
 
-void WorldLoader::load(std::string filename) {
+void WorldLoader::load(std::string filename, std::shared_ptr<Player> p) {
     std::ifstream mapFile(filename);
 
     if(!mapFile.is_open()) {
@@ -25,33 +24,37 @@ void WorldLoader::load(std::string filename) {
     square_width = static_cast<int>(line.size());
     float real_width = static_cast<float>(config.width) / square_width;
     float real_height = static_cast<float>(config.height) / square_height;
-    bool eof = false;
+    bool eofile = false;
 
-    while (mapFile >> std::noskipws >> c && !eof) {
-        if (c == ' ' || c == '\n') {
+    while (mapFile >> std::noskipws >> c && !eofile) {
+        if (c == ' ' || c == '\n' || c == 'P') {
             if (block_width > 0) {
-                Block block;
-                block.size = {block_width * real_width, real_height};
-                block.position = {spaces * real_width, (newlines - 1) * real_height};
+                std::shared_ptr<Block> block = std::make_shared<Block>();
+                block->size = {block_width * real_width, real_height};
+                block->position = {spaces * real_width, (newlines - 1) * real_height};
                 m_blocks.push_back(block);
                 spaces += block_width;
                 block_width = 0;
             }
-            if (c == '\n') {
+            ++spaces;
+            if (c == 'P') {
+                p->position = {spaces * real_width, (newlines - 1) * real_height};
+                m_entities.push_back(p);
+//                spaces += 50; // Player width so far
+            } else if (c == '\n') {
                 spaces = 0;
                 ++newlines;
-            } else ++spaces;
+            }
         } else if (c == 'x') {
             ++block_width;
         } else if (c == '-') {
-            eof = true;
+            eofile = true;
         }
     }
-
     mapFile.close();
 }
 
 void WorldLoader::reload(std::string filename) {
     m_blocks.clear();
-    load(filename);
+    load(filename, nullptr);
 }
