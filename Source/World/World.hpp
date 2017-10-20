@@ -16,7 +16,7 @@ public:
 
     void render(const RenderManager& );
 
-    void detectCollision();
+    void detectCollision(float );
 };
 
 

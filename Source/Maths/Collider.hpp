@@ -4,11 +4,13 @@
 
 #include "Vector2.hpp"
 
-enum class COLLISION_TYPE {
+enum COLLISION_TYPE {
     NO_COLLISION = 0,
-    HORIZONTAL = 1,
-    VERTICAL = 2,
-    BOTH = 3
+    VERTICAL = 1,
+    HORIZONTAL = 2,
+    BOTH = HORIZONTAL + VERTICAL,
+    HORIZONTAL_GROUND = 4,
+    BOTH_GROUND = VERTICAL + HORIZONTAL_GROUND
 };
 
 class Collider {

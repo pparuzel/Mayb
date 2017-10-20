@@ -37,10 +37,9 @@ void WorldLoader::load(std::string filename, std::shared_ptr<Player> p) {
                 block_width = 0;
             }
             ++spaces;
-            if (c == 'P') {
+            if (c == 'P' && p != nullptr) {
                 p->position = {spaces * real_width, (newlines - 1) * real_height};
                 m_entities.push_back(p);
-//                spaces += 50; // Player width so far
             } else if (c == '\n') {
                 spaces = 0;
                 ++newlines;

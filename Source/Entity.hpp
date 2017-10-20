@@ -13,10 +13,9 @@ public:
     Vector2 velocity;
     Vector2 size;
     Collider bounding_box;
+    bool grounded;
 
     Entity(Vector2 size_, Vector2 pos={0, 0}, Vector2 vel={0, 0});
-
-    Collider& getCollider();
 
     void resolveCollision(COLLISION_TYPE );
 };

@@ -15,9 +15,7 @@ public:
 
     void update(float );
 
-    void move();
-
-    void draw(const RenderManager&);
+    void move(float );
 };
 
 

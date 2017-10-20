@@ -3,3 +3,5 @@
 Future/
 cmake-build-debug/
 /Doxyfile
+/DocsWithCirculation/
+/Docs/

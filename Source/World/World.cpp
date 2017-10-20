@@ -7,27 +7,26 @@ World::World(const Config& config) : WorldLoader(config), m_player(std::make_sha
 void World::update(float frametime) {
 //    reload("../Resources/Maps/map2");
     m_player->update(frametime);
-    detectCollision();
-    m_player->move();
+    detectCollision(frametime);
+    m_player->move(frametime);
 }
 
 void World::render(const RenderManager& renderer) {
-    for (std::shared_ptr<Entity> ent : m_entities) {
-        renderer.drawEntity(*ent);
-    }
     for (std::shared_ptr<Block> block : m_blocks) {
         renderer.drawBlock(*block);
     }
+    for (std::shared_ptr<Entity> ent : m_entities) {
+        renderer.drawEntity(*ent);
+    }
 }
 
-void World::detectCollision() {
+void World::detectCollision(float dt) {
+    COLLISION_TYPE collType;
     for (std::shared_ptr<Entity> ent : m_entities) {
         for (std::shared_ptr<Block> block : m_blocks) {
-            COLLISION_TYPE col_type = ent->getCollider()
-                    .detectCollision(block->bounding_box, ent->velocity);
-            if(col_type != COLLISION_TYPE::NO_COLLISION) {
-                ent->resolveCollision(col_type);
-            }
+            collType =
+                    ent->bounding_box.detectCollision(block->bounding_box, ent->velocity * dt);
+                ent->resolveCollision(collType);
         }
     }
 }
