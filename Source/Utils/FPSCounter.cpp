@@ -20,7 +20,7 @@ void FPSCounter::update() {
         m_currentFrames = 0;
         m_fpsTimer.restart();
     }
-    m_lastTick = m_tickTimer.restart().asMilliseconds();
+    m_lastTick = m_tickTimer.restart().asSeconds();
 }
 
 void FPSCounter::draw(const RenderManager& renderer) {

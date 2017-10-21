@@ -7,8 +7,8 @@ World::World(const Config& config) : WorldLoader(config), m_player(std::make_sha
 void World::update(float frametime) {
 //    reload("../Resources/Maps/map2");
     m_player->update(frametime);
-    detectCollision(frametime);
-    m_player->move(frametime);
+    detectCollision();
+    m_player->move();
 }
 
 void World::render(const RenderManager& renderer) {
@@ -20,12 +20,12 @@ void World::render(const RenderManager& renderer) {
     }
 }
 
-void World::detectCollision(float dt) {
+void World::detectCollision() {
     COLLISION_TYPE collType;
     for (std::shared_ptr<Entity> ent : m_entities) {
         for (std::shared_ptr<Block> block : m_blocks) {
             collType =
-                    ent->bounding_box.detectCollision(block->bounding_box, ent->velocity * dt);
+                    ent->bounding_box.detectCollision(block->bounding_box, ent->velocity);
                 ent->resolveCollision(collType);
         }
     }

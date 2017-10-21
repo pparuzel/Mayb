@@ -18,6 +18,7 @@ void Application::handleEvents() {
 }
 
 void Application::run() {
+    m_window.setVerticalSyncEnabled(true);
     while (m_window.isOpen()) {
         handleEvents();
         m_fpsCounter.update();

@@ -15,7 +15,7 @@ public:
 
     void update(float );
 
-    void move(float );
+    void move();
 };
 
 
