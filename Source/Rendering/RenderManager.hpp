@@ -16,7 +16,7 @@ public:
 
     void drawBlock(const Block& block) const;
 
-    void drawEntity(const Entity& entity) const;
+    void drawEntity(Entity& entity) const;
 };
 
 

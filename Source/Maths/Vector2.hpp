@@ -12,6 +12,10 @@ struct Vector2 {
 
     sf::Vector2f toSFML() const;
 
+    operator sf::Vector2i() {
+        return sf::Vector2i(static_cast<int>(x), static_cast<int>(y));
+    }
+
     Vector2 operator+(const Vector2& );
 
     Vector2 operator+(float );

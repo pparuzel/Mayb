@@ -1,7 +1,11 @@
 #include "Entity.hpp"
 
 Entity::Entity(Vector2 size_, Vector2 pos, Vector2 vel)
-        : size(size_), position(pos), velocity(vel), bounding_box(position, size), grounded(false) {}
+        : size(size_), position(pos), velocity(vel),
+          bounding_box(position, size), grounded(false),
+          rect(sf::Vector2i(0, 0), size_), sprite(), texture(), texture_mirror() {
+    sprite.setTextureRect(rect);
+}
 
 void Entity::resolveCollision(COLLISION_TYPE collType) {
     if (collType == VERTICAL) {

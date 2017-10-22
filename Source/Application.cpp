@@ -26,7 +26,7 @@ void Application::run() {
         m_scene->update();
 
 
-        m_window.clear(sf::Color::Black);
+        m_window.clear(sf::Color{153, 204, 255});
         m_scene->render(m_renderer);
         m_fpsCounter.draw(m_renderer);
         m_window.display();

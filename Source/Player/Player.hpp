@@ -7,7 +7,7 @@
 #include "../Rendering/RenderManager.hpp"
 
 class Player : public Entity {
-
+    int animCounter;
 public:
     Player();
 

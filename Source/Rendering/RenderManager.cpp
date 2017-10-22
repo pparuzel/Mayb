@@ -7,14 +7,14 @@ void RenderManager::drawSFML(const sf::Drawable& drawable) const {
 }
 
 void RenderManager::drawBlock(const Block& block) const {
-    sf::RectangleShape rect(block.size.toSFML());
-    rect.setPosition(block.position.toSFML());
-    m_window.draw(rect);
+    sf::IntRect rect(sf::Vector2i(block.offset), sf::Vector2i(70, 70));
+    sf::Sprite sprite(Block::tiles, rect);
+    sprite.setPosition(block.position.toSFML());
+    m_window.draw(sprite);
 }
 
-void RenderManager::drawEntity(const Entity& entity) const {
-    sf::RectangleShape rect(entity.size.toSFML());
-    rect.setFillColor(sf::Color::Blue);
-    rect.setPosition(entity.position.toSFML());
-    m_window.draw(rect);
+void RenderManager::drawEntity(Entity& entity) const {
+    entity.sprite.setTextureRect(entity.rect);
+    entity.sprite.setPosition(entity.position.toSFML());
+    m_window.draw(entity.sprite);
 }

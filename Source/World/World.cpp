@@ -1,11 +1,10 @@
 #include "World.hpp"
 
 World::World(const Config& config) : WorldLoader(config), m_player(std::make_shared<Player>()) {
-    load("../Resources/Maps/map1", m_player);
+    load("../Resources/Maps/level0.map", m_player);
 }
 
 void World::update(float frametime) {
-//    reload("../Resources/Maps/map2");
     m_player->update(frametime);
     detectCollision();
     m_player->move();

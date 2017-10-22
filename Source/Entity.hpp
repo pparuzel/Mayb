@@ -14,6 +14,10 @@ public:
     Vector2 size;
     Collider bounding_box;
     bool grounded;
+    sf::IntRect rect;
+    sf::Sprite sprite;
+    sf::Texture texture;
+    sf::Texture texture_mirror;
 
     Entity(Vector2 size_, Vector2 pos={0, 0}, Vector2 vel={0, 0});
 
