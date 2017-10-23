@@ -7,7 +7,7 @@ WorldLoader::WorldLoader(const Config& config_ref)
 
 void WorldLoader::load(std::string filename, std::shared_ptr<Player>& p) {
     std::ifstream mapFile(filename);
-    // TODO filename zeby byl tylko "../Resources/"
+    // TODO filename -> only "../Resources/"
     if(!mapFile.is_open()) {
         std::cerr << "Error: Could not load map file!";
         return;
@@ -34,7 +34,7 @@ void WorldLoader::load(std::string filename, std::shared_ptr<Player>& p) {
                 else if (cmd == "grass") block_offset = {504, 576};
                 else if (cmd == "grassround") block_offset = {648, 0};
                 else if (cmd == "cloud") block_offset = {0, 0};
-//                else if (cmd == "sth") block->offset = {0, 0};
+//                else if (cmd == "sth") block_offset = {0, 0};
                 m_blocks.push_back(std::make_unique<Block>(
                         m_tiles, block_position, block_size, block_offset));
             }
