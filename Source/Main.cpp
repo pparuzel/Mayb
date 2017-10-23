@@ -5,4 +5,3 @@ int main() {
     Application app(conf);
     app.run();
 }
-

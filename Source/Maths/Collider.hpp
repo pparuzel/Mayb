@@ -13,14 +13,17 @@ enum class CollisionType {
 };
 
 class Collider {
-    sf::Vector2f&   m_position;
-    sf::Vector2i    m_size;
+    sf::Vector2f&           m_position;
+    sf::Vector2i            m_bodySize;
+    sf::Vector2i            m_hMargin;
+    sf::Vector2i            m_vMargin;
 public:
-    Collider(sf::Vector2f& position, sf::Vector2i size);
+    Collider(sf::Vector2f& position, sf::Vector2i bodySize,
+             sf::Vector2i horizMargin={0, 0}, sf::Vector2i vertMargin={0, 0});
 
     CollisionType detectCollision(const Collider&, sf::Vector2f);
 
-    void setSize(sf::Vector2i);
+    void setMargin(int top, int bottom, int left, int right);
 };
 
 
