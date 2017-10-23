@@ -1,27 +1,26 @@
 #ifndef MAYBSFML_COLLIDER_HPP
 #define MAYBSFML_COLLIDER_HPP
 
+#include "SFML/Graphics.hpp"
 
-#include "Vector2.hpp"
-
-enum COLLISION_TYPE {
-    NO_COLLISION = 0,
-    VERTICAL = 1,
-    HORIZONTAL = 2,
-    BOTH = HORIZONTAL + VERTICAL,
-    HORIZONTAL_GROUND = 4,
-    BOTH_GROUND = VERTICAL + HORIZONTAL_GROUND
+enum class CollisionType {
+    NoCollision         = 0,
+    Vertical            = 1,
+    Horizontal          = 2,
+    Both                = 3,
+    HorizontalGround    = 4,
+    BothGround          = 5
 };
 
 class Collider {
-    Vector2& m_position;
-    const Vector2& m_size;
+    sf::Vector2f&   m_position;
+    sf::Vector2i    m_size;
 public:
-    Collider(const Collider& );
+    Collider(sf::Vector2f& position, sf::Vector2i size);
 
-    Collider(Vector2& position, const Vector2& size);
+    CollisionType detectCollision(const Collider&, sf::Vector2f);
 
-    COLLISION_TYPE detectCollision(const Collider& , Vector2 );
+    void setSize(sf::Vector2i);
 };
 
 

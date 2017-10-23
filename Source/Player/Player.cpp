@@ -1,54 +1,55 @@
 #include "Player.hpp"
 
-Player::Player()
-        : Entity{{70.f, 110.f}}, animCounter(0) {
-    texture.loadFromFile("../Resources/player.png");
-    texture_mirror.loadFromFile("../Resources/player_mirror.png");
-    sprite.setTexture(texture);
+Player::Player(sf::Vector2f position)
+        : Entity{{80, 110}, position}, m_animCounter(0) {
+    m_texture.loadFromFile("../Resources/player.png");
+    m_texture_mirror.loadFromFile("../Resources/player_mirror.png");
+    m_sprite.setTexture(m_texture);
+    m_sprite.setTextureRect(m_indicator);
 }
 
-float speed = 500.f;
-
 void Player::handleKeyboardInput(float dt) {
-    velocity.x = 0;
-    rect.left = 0;
-    rect.top = 0;
+    m_velocity.x = 0;
+    m_indicator.left = 0;
+    m_indicator.top = 0;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        velocity.x -= speed * dt;
-        sprite.setTexture(texture_mirror);
-        rect.top = 110;
-        rect.left = 80;
-        if (animCounter > 7) {
-            rect.left = (rect.left + 80) % 160;
+        m_velocity.x -= speed * dt;
+        m_sprite.setTexture(m_texture_mirror);
+        m_indicator.top = 110;
+        m_indicator.left = 80;
+        if (m_animCounter > 7) {
+            m_indicator.left = (m_indicator.left + 80) % 160;
         }
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        velocity.x += speed * dt;
-        sprite.setTexture(texture);
-        rect.top = 110;
-        if (animCounter > 7) {
-            rect.left = (rect.left + 80) % 160;
+        m_velocity.x += speed * dt;
+        m_sprite.setTexture(m_texture);
+        m_indicator.top = 110;
+        if (m_animCounter > animDelay / 2) {
+            m_indicator.left = (m_indicator.left + 80) % 160;
         }
     }
-    animCounter = (animCounter + 1) % 14;
+    m_animCounter = (m_animCounter + 1) % animDelay;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and grounded) {
-        velocity.y = -20.f;
+        m_velocity.y = -20.f;
         grounded = false;
     }
 }
 
 void Player::update(float dt) {
     handleKeyboardInput(dt);
-    // Gravitational pull
-    velocity.y += 1.f;
+    // Apply gravity
+    m_velocity.y += 1.f;
 }
 
 void Player::move() {
-    if (not grounded and velocity.y != 0) {
-        rect.top = 0;
-        if (velocity.y < 0.f) rect.left = 80;
-        else rect.left = 160;
+    if (not grounded and m_velocity.y != 0) {
+        m_indicator.top = 0;
+        if (m_velocity.y < 0.f) m_indicator.left = 80;
+        else m_indicator.left = 160;
     }
-    position.x += velocity.x;
-    position.y += velocity.y;
+    m_position.x += m_velocity.x;
+    m_position.y += m_velocity.y;
+    m_sprite.setPosition(m_position);
+    m_sprite.setTextureRect(m_indicator);
 }

@@ -10,5 +10,5 @@ void GameScene::update() {
 
 void GameScene::render(const RenderManager& renderer) {
     m_world.render(renderer);
-    // Possible HUD rendering here...
+    // TODO Possible HUD rendering here...
 }

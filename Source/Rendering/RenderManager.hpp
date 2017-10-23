@@ -3,14 +3,14 @@
 
 
 #include <SFML/Graphics.hpp>
-#include "../World/Blocks/Block.hpp"
+#include "../World/Objects/Block.hpp"
 #include "../Entity.hpp"
 
 
 class RenderManager {
     sf::RenderWindow& m_window;
 public:
-    RenderManager(sf::RenderWindow& window);
+    explicit RenderManager(sf::RenderWindow& window);
 
     void drawSFML(const sf::Drawable& drawable) const;
 

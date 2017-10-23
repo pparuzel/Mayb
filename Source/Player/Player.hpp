@@ -3,19 +3,23 @@
 
 
 #include <SFML/Graphics.hpp>
-#include "../Entity.hpp"
 #include "../Rendering/RenderManager.hpp"
+#include "../Entity.hpp"
 
 class Player : public Entity {
-    int animCounter;
+    int m_animCounter;
 public:
-    Player();
+    explicit Player(sf::Vector2f position={0, 0});
 
-    void handleKeyboardInput(float );
+    void handleKeyboardInput(float);
 
-    void update(float );
+    void update(float);
 
     void move();
+
+private:
+    static constexpr float  speed = 500.f;
+    static constexpr int    animDelay = 14;
 };
 
 

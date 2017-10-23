@@ -3,13 +3,13 @@
 
 
 #include "Scene.hpp"
-#include "../World/World.hpp"
-#include "../Player/Player.hpp"
 #include "../Utils/FPSCounter.hpp"
+#include "../Player/Player.hpp"
+#include "../World/World.hpp"
 
 class GameScene : public Scene {
-    World m_world;
-    const FPSCounter& m_counter;
+    World               m_world;
+    const FPSCounter&   m_counter;
 public:
     GameScene(const Config&, const FPSCounter& );
 

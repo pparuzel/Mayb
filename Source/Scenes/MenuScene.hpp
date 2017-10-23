@@ -2,13 +2,13 @@
 #define MAYBSFML_MENUSCENE_HPP
 
 
-#include "Scene.hpp"
 #include "../Rendering/RenderManager.hpp"
 #include "../Config.hpp"
+#include "Scene.hpp"
 
 class MenuScene : public Scene {
 public:
-    MenuScene(const Config& );
+    explicit MenuScene(const Config& );
 
     void update() override;
 

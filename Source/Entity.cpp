@@ -1,23 +1,32 @@
 #include "Entity.hpp"
 
-Entity::Entity(Vector2 size_, Vector2 pos, Vector2 vel)
-        : size(size_), position(pos), velocity(vel),
-          bounding_box(position, size), grounded(false),
-          rect(sf::Vector2i(0, 0), size_), sprite(), texture(), texture_mirror() {
-    sprite.setTextureRect(rect);
+Entity::Entity(sf::Vector2i size, sf::Vector2f position, sf::Vector2f velocity, sf::Vector2i offset)
+        : m_size(size), m_position(position), m_velocity(velocity),
+          m_bounds(m_position, size), grounded(false),
+          Renderable(offset, size) {
+    m_sprite.setTextureRect(m_indicator);
+    m_sprite.setPosition(position);
 }
 
-void Entity::resolveCollision(COLLISION_TYPE collType) {
-    if (collType == VERTICAL) {
-        velocity.x = 0;
+void Entity::resolveCollision(CollisionType collType) {
+    if (collType == CollisionType::Vertical) {
+        m_velocity.x = 0;
         grounded = false;
-    } else if (collType == HORIZONTAL || collType == HORIZONTAL_GROUND) {
-        velocity.y = 0;
-    } else if (collType == BOTH || collType == BOTH_GROUND) {
-        velocity = {0, 0};
+    } else if (collType == CollisionType::Horizontal || collType == CollisionType::HorizontalGround) {
+        m_velocity.y = 0;
+    } else if (collType == CollisionType::Both || collType == CollisionType::BothGround) {
+        m_velocity = {0, 0};
         grounded = false;
     }
-    if (collType == HORIZONTAL_GROUND || collType == BOTH_GROUND) {
+    if (collType == CollisionType::HorizontalGround || collType == CollisionType::BothGround) {
         grounded = true;
     }
+}
+
+const sf::Vector2f& Entity::velocity() const {
+    return m_velocity;
+}
+
+Collider& Entity::AABBox() {
+    return m_bounds;
 }

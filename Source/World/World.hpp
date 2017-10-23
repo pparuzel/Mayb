@@ -2,21 +2,22 @@
 #define MAYBSFML_WORLD_HPP
 
 
-#include "../Config.hpp"
+#include "Objects/Block.hpp"
 #include "WorldLoader.hpp"
 #include "../Rendering/RenderManager.hpp"
 #include "../Player/Player.hpp"
+#include "../Config.hpp"
 
 class World : public WorldLoader {
     std::shared_ptr<Player> m_player;
 public:
-    World(const Config&);
+    explicit World(const Config&);
 
-    void update(float );
+    void update(float);
 
-    void render(const RenderManager& );
+    void render(const RenderManager&);
 
-    void detectCollision();
+    void handleCollision();
 };
 
 

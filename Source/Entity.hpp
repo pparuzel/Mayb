@@ -2,26 +2,26 @@
 #define MAYBSFML_ENTITY_HPP
 
 
-#include <SFML/Graphics.hpp>
-#include "Maths/Vector2.hpp"
+#include "Rendering/Renderable.hpp"
 #include "Maths/Collider.hpp"
 
 
-class Entity {
+class Entity : public Renderable {
+    sf::Vector2i    m_size;
+    Collider        m_bounds;
+protected:
+    sf::Vector2f    m_velocity;
+    sf::Vector2f    m_position;
+    bool            grounded;
 public:
-    Vector2 position;
-    Vector2 velocity;
-    Vector2 size;
-    Collider bounding_box;
-    bool grounded;
-    sf::IntRect rect;
-    sf::Sprite sprite;
-    sf::Texture texture;
-    sf::Texture texture_mirror;
+    explicit Entity(sf::Vector2i size, sf::Vector2f position={0, 0},
+                    sf::Vector2f velocity={0, 0}, sf::Vector2i offset={0, 0});
 
-    Entity(Vector2 size_, Vector2 pos={0, 0}, Vector2 vel={0, 0});
+    void resolveCollision(CollisionType);
 
-    void resolveCollision(COLLISION_TYPE );
+    const sf::Vector2f& velocity() const;
+
+    Collider& AABBox();
 };
 
 

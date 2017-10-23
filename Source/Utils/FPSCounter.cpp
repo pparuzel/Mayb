@@ -17,8 +17,8 @@ void FPSCounter::update() {
 
     if (m_fpsTimer.getElapsedTime().asSeconds() > slotTime) {
         m_fps = m_currentFrames / m_fpsTimer.getElapsedTime().asSeconds();
-        m_currentFrames = 0;
         m_fpsTimer.restart();
+        m_currentFrames = 0;
     }
     m_lastTick = m_tickTimer.restart().asSeconds();
 }

@@ -8,19 +8,18 @@
 #include "../Rendering/RenderManager.hpp"
 
 class FPSCounter {
-    sf::Clock m_fpsTimer;
-    sf::Clock m_tickTimer;
-    sf::Font m_font;
-    sf::Text m_text;
-
-    int m_currentFrames;
-    float m_fps;
-    float m_lastTick;
+    sf::Clock   m_fpsTimer;
+    sf::Clock   m_tickTimer;
+    sf::Font    m_font;
+    sf::Text    m_text;
+    int         m_currentFrames;
+    float       m_fps;
+    float       m_lastTick;
 public:
     FPSCounter();
 
     void update();
-    void draw(const RenderManager& );
+    void draw(const RenderManager&);
     float frametime() const;
 };
 
