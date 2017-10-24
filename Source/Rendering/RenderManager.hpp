@@ -17,6 +17,8 @@ public:
     void drawBlock(const Block& block) const;
 
     void drawEntity(Entity& entity) const;
+
+    void loadSplash(const sf::Sprite&) const;
 };
 
 

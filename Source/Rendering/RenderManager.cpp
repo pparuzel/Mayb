@@ -13,3 +13,8 @@ void RenderManager::drawBlock(const Block& block) const {
 void RenderManager::drawEntity(Entity& entity) const {
     m_window.draw(entity.sprite());
 }
+
+void RenderManager::loadSplash(const sf::Sprite& s) const {
+    m_window.clear(sf::Color::Black);
+    m_window.draw(s);
+}

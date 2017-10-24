@@ -25,13 +25,17 @@ set(SOURCE_FILES
         Source/Scenes/MenuScene.hpp
         Source/Scenes/GameScene.cpp
         Source/Scenes/GameScene.hpp
+        Source/Scenes/SplashScreen.cpp
+        Source/Scenes/SplashScreen.hpp
         Source/World/World.cpp
         Source/World/World.hpp
         Source/World/WorldLoader.cpp
         Source/World/WorldLoader.hpp
         Source/World/Objects/Block.cpp
         Source/World/Objects/Block.hpp
-        Source/World/Objects/GameObject.cpp Source/World/Objects/GameObject.hpp)
+        Source/World/Objects/GameObject.cpp
+        Source/World/Objects/GameObject.hpp
+        )
 add_executable(MaybSFML ${SOURCE_FILES})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
