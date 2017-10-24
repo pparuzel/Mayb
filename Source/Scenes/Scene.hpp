@@ -4,7 +4,11 @@
 
 #include "../Rendering/RenderManager.hpp"
 
-struct Scene {
+class Scene {
+protected:
+    bool hasFinished = false;
+public:
+    bool closed() { return hasFinished; }
     virtual void update() = 0;
     virtual void render(const RenderManager&) = 0;
 };

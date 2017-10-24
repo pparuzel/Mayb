@@ -9,11 +9,12 @@
 
 
 class SplashScreen : public Scene {
-    const FPSCounter&   m_fpsCounter;
-    sf::Sprite          m_splash;
-    sf::Texture         m_texture;
-    float               m_counter;
-    int                 m_trans;
+    std::vector<sf::Sprite>     m_sprites;
+    std::vector<sf::Texture>    m_textures;
+    const FPSCounter&           m_fpsCounter;
+    float                       m_counter;
+    int                         m_trans;
+    int                         m_direction;
 public:
     SplashScreen(const Config&, const FPSCounter& fpsCounter);
 
@@ -21,8 +22,10 @@ public:
 
     void render(const RenderManager& renderer) override;
 private:
-    static constexpr float transitionDelay = .2f;
-    static constexpr int   precision       = 300;
+    void showLogo();
+
+    static constexpr float transitionDelay = .1f;
+    static constexpr int   precision       = 255;
 };
 
 

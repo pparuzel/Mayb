@@ -4,13 +4,15 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "Utils/FPSCounter.hpp"
+#include "Scenes/SplashScreen.hpp"
 #include "Scenes/GameScene.hpp"
+#include "Scenes/MenuScene.hpp"
 #include "Scenes/Scene.hpp"
 #include "Config.hpp"
 
 class Application {
-    sf::RenderWindow            m_window;
     RenderManager               m_renderer;
+    sf::RenderWindow            m_window;
     std::unique_ptr<FPSCounter> m_fpsCounter;
     std::unique_ptr<Scene>      m_scene;
     const Config&               m_config;

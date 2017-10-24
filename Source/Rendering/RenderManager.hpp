@@ -19,6 +19,8 @@ public:
     void drawEntity(Entity& entity) const;
 
     void loadSplash(const sf::Sprite&) const;
+
+    void refresh(sf::Color color) const;
 };
 
 

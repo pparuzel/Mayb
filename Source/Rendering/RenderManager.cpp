@@ -15,6 +15,9 @@ void RenderManager::drawEntity(Entity& entity) const {
 }
 
 void RenderManager::loadSplash(const sf::Sprite& s) const {
-    m_window.clear(sf::Color::Black);
     m_window.draw(s);
+}
+
+void RenderManager::refresh(sf::Color color) const {
+    m_window.clear(color);
 }

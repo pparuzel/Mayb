@@ -4,7 +4,7 @@ Application::Application(const Config& config)
         : m_renderer(m_window), m_config(config) {
 
     m_fpsCounter = std::make_unique<FPSCounter>();
-    m_scene = std::make_unique<GameScene>(config, *m_fpsCounter);
+    m_scene = std::make_unique<SplashScreen>(config, *m_fpsCounter);
     m_window.create(sf::VideoMode(config.width, config.height), "Mayb2D");
     m_window.setFramerateLimit(config.fps_cap);
     m_window.setVerticalSyncEnabled(config.isVSyncOn);
@@ -17,6 +17,9 @@ void Application::handleEvents() {
             m_window.close();
         }
     }
+    if (m_scene->closed()) {
+        m_scene.reset(new GameScene(m_config, *m_fpsCounter));
+    }
 }
 
 void Application::run() {
@@ -25,7 +28,7 @@ void Application::run() {
         m_fpsCounter->update();
         m_scene->update();
 
-        m_window.clear(sf::Color{153, 204, 255});
+        m_window.clear(sf::Color::Black);
         m_scene->render(m_renderer);
         m_fpsCounter->draw(m_renderer);
         m_window.display();

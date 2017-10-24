@@ -13,6 +13,7 @@ void World::update(float frametime) {
 }
 
 void World::render(const RenderManager& renderer) {
+    renderer.refresh(sf::Color{153, 204, 255});
     for (const std::shared_ptr<Block>& block : m_blocks) {
         renderer.drawBlock(*block);
     }
