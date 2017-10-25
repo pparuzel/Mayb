@@ -11,10 +11,10 @@
 #include "Config.hpp"
 
 class Application {
-    RenderManager               m_renderer;
-    sf::RenderWindow            m_window;
     std::unique_ptr<FPSCounter> m_fpsCounter;
     std::unique_ptr<Scene>      m_scene;
+    RenderManager               m_renderer;
+    sf::RenderWindow            m_window;
     const Config&               m_config;
 public:
     explicit Application(const Config&);
@@ -22,6 +22,8 @@ public:
     void handleEvents();
 
     void run();
+private:
+    void changeScene();
 };
 
 

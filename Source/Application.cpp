@@ -17,12 +17,6 @@ void Application::handleEvents() {
             m_window.close();
         }
     }
-    if (m_scene->closed()) {
-        if (m_scene->nextScene() == "GameScene") {
-            m_scene.reset(new GameScene(m_config, *m_fpsCounter));
-        } else
-            m_scene.reset(new MenuScene(m_config, *m_fpsCounter));
-    }
 }
 
 void Application::run() {
@@ -35,5 +29,19 @@ void Application::run() {
         m_scene->render(m_renderer);
         m_fpsCounter->draw(m_renderer);
         m_window.display();
+        if (m_scene->closed())
+            changeScene();
     }
+}
+
+void Application::changeScene() {
+    Scene* scene_ptr = nullptr;
+    if      (m_scene->nextScene() == "GameScene")
+        scene_ptr = new GameScene(m_config, *m_fpsCounter);
+    else if (m_scene->nextScene() == "MenuScene")
+        scene_ptr = new MenuScene(m_config, *m_fpsCounter);
+    else if (m_scene->nextScene() == "Exit")
+        m_window.close();
+    else throw "Wrong classname!\n";
+    m_scene.reset(scene_ptr);
 }
