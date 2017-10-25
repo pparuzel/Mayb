@@ -7,11 +7,12 @@
 #include "../Utils/FPSCounter.hpp"
 #include "../Config.hpp"
 #include "Scene.hpp"
+#include "../Utils/SpriteBuilder.hpp"
 
 class MenuScene : public Scene {
-    std::vector<sf::Texture>    m_textures;
-    const FPSCounter&           m_fpsCounter;
-    std::array<bool, 1>         m_focusedButton;
+    const FPSCounter&   m_fpsCounter;
+    SpriteBuilder       m_buttons;
+    int                 m_currentButton;
 public:
     explicit MenuScene(const Config& config, const FPSCounter& fpsCounter);
 

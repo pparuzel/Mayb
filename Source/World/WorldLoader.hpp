@@ -19,9 +19,9 @@ protected:
 public:
     explicit WorldLoader(const Config&);
 
-    void load(std::string filename, std::shared_ptr<Player>&);
+    void load(std::string filepath, std::shared_ptr<Player>&);
 
-    void reload(std::string filename);
+    void reload(std::string filepath);
 };
 
 

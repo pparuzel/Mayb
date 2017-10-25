@@ -5,9 +5,9 @@ WorldLoader::WorldLoader(const Config& config_ref)
     m_tiles.loadFromFile("../Resources/tiles.png");
 }
 
-void WorldLoader::load(std::string filename, std::shared_ptr<Player>& p) {
-    std::ifstream mapFile(filename);
-    // TODO filename -> only "../Resources/"
+void WorldLoader::load(std::string filepath, std::shared_ptr<Player>& p) {
+    filepath = "../Resources/Maps/" + filepath;
+    std::ifstream mapFile(filepath);
     if(!mapFile.is_open()) {
         std::cerr << "Error: Could not load map file!";
         return;

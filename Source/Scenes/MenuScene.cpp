@@ -1,29 +1,40 @@
 #include "MenuScene.hpp"
 
 MenuScene::MenuScene(const Config& config, const FPSCounter& fpsCounter)
-        : m_fpsCounter(fpsCounter), m_textures(), m_focusedButton() {
-    m_textures.emplace_back();
-    m_textures.emplace_back();
-    m_textures[0].loadFromFile("../Resources/menu_bg.png");
-    m_textures[1].loadFromFile("../Resources/newgame_button.png");
-    for (bool& isfocused : m_focusedButton) {
-        isfocused = false;
-    }
-    m_focusedButton[0] = true;
+        : m_fpsCounter(fpsCounter), m_currentButton(0), m_buttons() {
+    m_buttons.build("menu_bg.png", {0.f, 0.f});
+    m_buttons.build("newgame_button.png", {360, 200});
+    m_buttons.build("exit_button.png", {360, 320});
 }
 
 void MenuScene::render(const RenderManager& renderer) {
     renderer.refresh(sf::Color{153, 204, 255});
-    renderer.loadSprite(sf::Sprite(m_textures[0]));
-    sf::Sprite tmp;
-    tmp.setPosition(360, 200);
-    tmp.setTexture(m_textures[1]);
-    renderer.loadSprite(tmp);
+    for (const auto& button : m_buttons.sprites()) {
+        renderer.loadSprite(button);
+    }
+    sf::RectangleShape indicator({548, 96});
+    indicator.setFillColor(sf::Color{0, 0, 0, 80});
+    indicator.setPosition(360, 200 + 120*m_currentButton);
+    renderer.drawSFML(indicator);
 }
 
+int numberOfButtons = 2;
+
 void MenuScene::update() {
-    if (m_focusedButton[0] and sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-        hasFinished = true;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+        switch(m_currentButton) {
+            case 0:
+                hasFinished = true;
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+        m_currentButton = --m_currentButton < 0 ? numberOfButtons-1 : m_currentButton;
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+        m_currentButton = ++m_currentButton > numberOfButtons-1 ? 0 : m_currentButton;
     }
 }
 
