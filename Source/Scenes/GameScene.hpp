@@ -17,6 +17,7 @@ public:
 
     void render(const RenderManager& renderer) override;
 
+    const std::string nextScene() const override;
 };
 
 

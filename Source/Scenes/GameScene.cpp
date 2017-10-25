@@ -12,3 +12,7 @@ void GameScene::render(const RenderManager& renderer) {
     m_world.render(renderer);
     // TODO Possible HUD rendering here...
 }
+
+const std::string GameScene::nextScene() const {
+    return "MenuScene";
+}

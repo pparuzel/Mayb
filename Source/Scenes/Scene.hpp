@@ -9,6 +9,7 @@ protected:
     bool hasFinished = false;
 public:
     bool closed() { return hasFinished; }
+    virtual const std::string nextScene() const = 0;
     virtual void update() = 0;
     virtual void render(const RenderManager&) = 0;
 };

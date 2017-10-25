@@ -18,7 +18,10 @@ void Application::handleEvents() {
         }
     }
     if (m_scene->closed()) {
-        m_scene.reset(new GameScene(m_config, *m_fpsCounter));
+        if (m_scene->nextScene() == "GameScene") {
+            m_scene.reset(new GameScene(m_config, *m_fpsCounter));
+        } else
+            m_scene.reset(new MenuScene(m_config, *m_fpsCounter));
     }
 }
 

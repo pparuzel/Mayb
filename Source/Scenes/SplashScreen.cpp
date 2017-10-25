@@ -4,6 +4,7 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
         : m_fpsCounter(fpsCounter), m_sprites(3), m_textures(3),
           m_counter(0), m_trans(0), m_direction(1) {
     sf::Texture tex1, tex2, tex3;
+    sf::Sprite splash1, splash2, splash3;
     if (    !tex1.loadFromFile("../Resources/splashscreen.png") ||
             !tex2.loadFromFile("../Resources/splashscreen2.png") ||
             !tex3.loadFromFile("../Resources/xd.png")) {
@@ -13,7 +14,6 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
     m_textures[0] = tex1;
     m_textures[1] = tex2;
     m_textures[2] = tex3;
-    sf::Sprite splash1, splash2, splash3;
     m_sprites[0] = splash1;
     m_sprites[1] = splash2;
     m_sprites[2] = splash3;
@@ -27,7 +27,7 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
 
 void SplashScreen::update() {
     showLogo();
-    if (m_trans < 0 or sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+    if ((m_trans < 5 and m_direction == -1) or sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         hasFinished = true;
     }
 }
@@ -42,7 +42,7 @@ void SplashScreen::render(const RenderManager& renderer) {
     if (m_direction == -1) { m_sprites[2].setColor(sf::Color(
                 255, 255, 255, alpha)); }
     for (const auto& sprite : m_sprites) {
-        renderer.loadSplash(sprite);
+        renderer.loadSprite(sprite);
     }
 }
 
@@ -56,4 +56,8 @@ void SplashScreen::showLogo() {
         m_counter = 1.5f;
         m_trans += m_direction;
     }
+}
+
+const std::string SplashScreen::nextScene() const {
+    return "MenuScene";
 }

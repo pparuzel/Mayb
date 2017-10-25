@@ -14,7 +14,7 @@ void RenderManager::drawEntity(Entity& entity) const {
     m_window.draw(entity.sprite());
 }
 
-void RenderManager::loadSplash(const sf::Sprite& s) const {
+void RenderManager::loadSprite(const sf::Sprite& s) const {
     m_window.draw(s);
 }
 
