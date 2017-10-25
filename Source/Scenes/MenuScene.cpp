@@ -8,7 +8,7 @@ MenuScene::MenuScene(const Config& config, const FPSCounter& fpsCounter,
     m_buttons.build("MainMenu/newgame_button.png", {360, 200});
     m_buttons.build("MainMenu/load_button.png", {360, 320});
     m_buttons.build("MainMenu/exit_button.png", {360, 440});
-    m_numberOfButtons = 4;
+    m_numberOfButtons = 3;
     m_locked = true;
 }
 
