@@ -10,6 +10,8 @@ set(SOURCE_FILES
         Source/Application.hpp
         Source/Utils/FPSCounter.cpp
         Source/Utils/FPSCounter.hpp
+        Source/Utils/SpriteBuilder.cpp
+        Source/Utils/SpriteBuilder.hpp
         Source/Rendering/RenderManager.cpp
         Source/Rendering/RenderManager.hpp
         Source/Rendering/Renderable.hpp
@@ -35,7 +37,7 @@ set(SOURCE_FILES
         Source/World/Objects/Block.hpp
         Source/World/Objects/GameObject.cpp
         Source/World/Objects/GameObject.hpp
-        Source/Utils/SpriteBuilder.cpp Source/Utils/SpriteBuilder.hpp)
+        )
 add_executable(MaybSFML ${SOURCE_FILES})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
