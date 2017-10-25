@@ -2,8 +2,8 @@
 
 Player::Player(sf::Vector2f position)
         : Entity{{80, 110}, position}, m_animCounter(0) {
-    m_texture.loadFromFile("../Resources/player.png");
-    m_texture_mirror.loadFromFile("../Resources/player_mirror.png");
+    m_texture.loadFromFile("../Resources/World/player.png");
+    m_texture_mirror.loadFromFile("../Resources/World/player_mirror.png");
     m_sprite.setTexture(m_texture);
     m_sprite.setTextureRect(m_indicator);
 }

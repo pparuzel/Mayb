@@ -21,9 +21,9 @@ void Application::handleEvents() {
 
 void Application::run() {
     while (m_window.isOpen()) {
-        handleEvents();
         m_fpsCounter->update();
         m_scene->update();
+        handleEvents();
 
         m_window.clear(sf::Color::Black);
         m_scene->render(m_renderer);
@@ -39,7 +39,7 @@ void Application::changeScene() {
     if      (m_scene->nextScene() == "GameScene")
         scene_ptr = new GameScene(m_config, *m_fpsCounter);
     else if (m_scene->nextScene() == "MenuScene")
-        scene_ptr = new MenuScene(m_config, *m_fpsCounter);
+        scene_ptr = new MenuScene(m_config, *m_fpsCounter, &m_window);
     else if (m_scene->nextScene() == "Exit")
         m_window.close();
     else throw "Wrong classname!\n";

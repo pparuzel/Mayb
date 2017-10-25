@@ -5,7 +5,7 @@ FPSCounter::FPSCounter()
     m_text.move(10, 10);
     m_text.setOutlineColor(sf::Color::Blue);
     m_text.setOutlineThickness(2);
-    m_font.loadFromFile("../Resources/arial_bold.ttf");
+    m_font.loadFromFile("../Resources/Fonts/arial_bold.ttf");
     m_text.setFont(m_font);
     m_text.setCharacterSize(25);
 }

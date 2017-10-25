@@ -2,9 +2,10 @@
 
 WorldLoader::WorldLoader(const Config& config_ref)
         : m_entities(), config(config_ref), m_tiles() {
-    m_tiles.loadFromFile("../Resources/tiles.png");
+    m_tiles.loadFromFile("../Resources/World/tiles.png");
 }
 
+// TODO Blocks take only one reference to e.g. Grass Texture
 void WorldLoader::load(std::string filepath, std::shared_ptr<Player>& p) {
     filepath = "../Resources/Maps/" + filepath;
     std::ifstream mapFile(filepath);

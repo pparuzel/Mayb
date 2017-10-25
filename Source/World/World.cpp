@@ -9,7 +9,6 @@ void World::update(float frametime) {
     m_player->update(frametime);
     handleCollision();
     m_player->move();
-
 }
 
 void World::render(const RenderManager& renderer) {

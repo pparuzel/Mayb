@@ -5,9 +5,9 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
           m_counter(0), m_trans(0), m_direction(1) {
     sf::Texture tex1, tex2, tex3;
     sf::Sprite splash1, splash2, splash3;
-    if (    !tex1.loadFromFile("../Resources/splashscreen.png") ||
-            !tex2.loadFromFile("../Resources/splashscreen2.png") ||
-            !tex3.loadFromFile("../Resources/xd.png")) {
+    if (    !tex1.loadFromFile("../Resources/SplashScreen/splashscreen.png") ||
+            !tex2.loadFromFile("../Resources/SplashScreen/splashscreen2.png") ||
+            !tex3.loadFromFile("../Resources/SplashScreen/xd.png")) {
         std::cerr << "Could not load SplashScreen!\n";
         return;
     }

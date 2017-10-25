@@ -12,9 +12,12 @@
 class MenuScene : public Scene {
     const FPSCounter&   m_fpsCounter;
     SpriteBuilder       m_buttons;
+    sf::RenderWindow*   m_window;
     int                 m_currentButton;
+    int                 m_numberOfButtons;
+    bool                m_locked;
 public:
-    explicit MenuScene(const Config& config, const FPSCounter& fpsCounter);
+    explicit MenuScene(const Config&, const FPSCounter&, sf::RenderWindow*);
 
     void update() override;
 
