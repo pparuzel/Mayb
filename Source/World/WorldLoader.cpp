@@ -36,7 +36,7 @@ void WorldLoader::load(std::string filepath, std::shared_ptr<Player>& p) {
                 else if (cmd == "grassround") block_offset = {648, 0};
                 else if (cmd == "cloud") block_offset = {0, 0};
 //                else if (cmd == "sth") block_offset = {0, 0};
-                m_blocks.push_back(std::make_unique<Block>(
+                m_blocks.push_back(std::make_shared<Block>(
                         m_tiles, block_position, block_size, block_offset));
             }
         }
