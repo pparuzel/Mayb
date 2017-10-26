@@ -6,6 +6,9 @@ GameScene::GameScene(const Config& config, const FPSCounter& fpsCounter)
 
 void GameScene::update() {
     m_world.update(m_counter.frametime());
+    if (m_world.isGameOver()) {
+        hasFinished = true;
+    }
 }
 
 void GameScene::render(const RenderManager& renderer) {

@@ -14,6 +14,8 @@ public:
     explicit Renderable(sf::Vector2i offset, sf::Vector2i size);
 
     const sf::Sprite& sprite() const;
+
+    virtual ~Renderable() = default;
 };
 
 

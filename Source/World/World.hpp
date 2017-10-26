@@ -10,6 +10,8 @@
 
 class World : public WorldLoader {
     std::shared_ptr<Player> m_player;
+    bool                    m_isGameOver;
+
 public:
     explicit World(const Config&);
 
@@ -18,6 +20,8 @@ public:
     void render(const RenderManager&);
 
     void handleCollision();
+
+    bool isGameOver();
 };
 
 
