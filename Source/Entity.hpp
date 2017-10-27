@@ -3,10 +3,11 @@
 
 
 #include "Rendering/Renderable.hpp"
+#include "States/Serializable.hpp"
 #include "Maths/Collider.hpp"
 
 
-class Entity : public Renderable {
+class Entity : public Renderable, Serializable {
     sf::Vector2i    m_size;
     Collider        m_bounds;
 protected:
@@ -14,14 +15,23 @@ protected:
     sf::Vector2f    m_position;
     bool            grounded;
 public:
-    explicit Entity(sf::Vector2i size, sf::Vector2f position={0, 0},
-                    sf::Vector2f velocity={0, 0}, sf::Vector2i offset={0, 0});
+    explicit Entity(sf::Vector2i size, sf::Vector2f position={0, 0}, sf::Vector2i offset={0, 0},
+                    const std::string& metaname="Entity");
 
     void resolveCollision(CollisionType);
 
     const sf::Vector2f& velocity() const;
 
     Collider& AABBox();
+
+    void writeObject() override;
+
+    void readObject() override;
+
+    ~Entity() override {
+        writeObject();
+        readObject();
+    }
 };
 
 

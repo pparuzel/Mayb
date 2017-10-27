@@ -37,7 +37,7 @@ set(SOURCE_FILES
         Source/World/Objects/Block.hpp
         Source/World/Objects/GameObject.cpp
         Source/World/Objects/GameObject.hpp
-        )
+        Source/States/Serializable.hpp Source/Utils/GameSave.cpp Source/Utils/GameSave.hpp)
 add_executable(MaybSFML ${SOURCE_FILES})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
