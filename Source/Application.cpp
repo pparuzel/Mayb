@@ -30,7 +30,7 @@ void Application::changeScene() {
     if      (m_scene->nextScene() == "GameScene")
         scene_ptr = new GameScene(m_config, *m_fpsCounter);
     else if (m_scene->nextScene() == "MenuScene")
-        scene_ptr = new MenuScene(m_config, *m_fpsCounter, &m_window);
+        scene_ptr = new MenuScene(m_config, *m_fpsCounter);
     else if (m_scene->nextScene() == "Exit")
         m_window.close();
     else throw "Wrong classname!\n";

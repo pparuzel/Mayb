@@ -1,0 +1,10 @@
+#ifndef MAYBSFML_GAMESAVE_HPP
+#define MAYBSFML_GAMESAVE_HPP
+
+
+class GameSave {
+
+};
+
+
+#endif //MAYBSFML_GAMESAVE_HPP

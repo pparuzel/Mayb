@@ -1,9 +1,8 @@
 #include "MenuScene.hpp"
 
-MenuScene::MenuScene(const Config& config, const FPSCounter& fpsCounter,
-                     sf::RenderWindow* window)
+MenuScene::MenuScene(const Config& config, const FPSCounter& fpsCounter)
         : m_fpsCounter(fpsCounter), m_currentButton(0),
-          m_buttons(), m_window(window) {
+          m_buttons() {
     m_buttons.build("MainMenu/menu_bg.png", {0.f, 0.f});
     m_buttons.build("MainMenu/newgame_button.png", {360, 200});
     m_buttons.build("MainMenu/load_button.png", {360, 320});
@@ -22,34 +21,30 @@ void MenuScene::render(const RenderManager& renderer) {
     renderer.drawSFML(indicator);
 }
 
-void MenuScene::update() {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-        switch(m_currentButton) {
-            case 0:
-                hasFinished = true;
-                break;
-            case 2:
-                m_window->close();
-                break;
-            default:
-                break;
-        }
-//    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and not m_locked) {
-//        m_currentButton = --m_currentButton < 0 ? m_numberOfButtons-1 : m_currentButton;
-//        m_locked = true;
-//    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) and not m_locked) {
-//        m_currentButton = ++m_currentButton > m_numberOfButtons-1 ? 0 : m_currentButton;
-//        m_locked = true;
-//    } else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)
-//            and not sf::Keyboard::isKeyPressed(sf::Keyboard::S)) m_locked = false;
-}
+void MenuScene::update() {}
 
 void MenuScene::handleEvents(sf::RenderWindow& window) {
     sf::Event event{};
     while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
+            window.close();
+        }
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Return) {
-
+                switch (m_currentButton) {
+                    case 0:
+                        hasFinished = true;
+                        break;
+                    case 2:
+                        window.close();
+                        break;
+                    default:
+                        break;
+                }
+            } else if (event.key.code == sf::Keyboard::W) {
+                m_currentButton = --m_currentButton < 0 ? m_numberOfButtons-1 : m_currentButton;
+            } else if (event.key.code == sf::Keyboard::S) {
+                m_currentButton = ++m_currentButton > m_numberOfButtons-1 ? 0 : m_currentButton;
             }
         }
     }

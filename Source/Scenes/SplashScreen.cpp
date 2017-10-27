@@ -27,7 +27,7 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
 
 void SplashScreen::update() {
     showLogo();
-    if ((m_trans < 5 and m_direction == -1) or sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+    if ((m_trans < 5 and m_direction == -1)) {
         hasFinished = true;
     }
 }
@@ -65,6 +65,8 @@ const std::string SplashScreen::nextScene() const {
 void SplashScreen::handleEvents(sf::RenderWindow& window) {
     sf::Event event{};
     while (window.pollEvent(event)) {
-
+        if (event.type == event.KeyPressed) {
+            hasFinished = true;
+        }
     }
 }
