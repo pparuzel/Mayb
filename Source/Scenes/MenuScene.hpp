@@ -24,6 +24,9 @@ public:
     void render(const RenderManager&) override;
 
     const std::string nextScene() const override;
+
+    // TODO handle events
+    void handleEvents(sf::RenderWindow& window) override;
 };
 
 

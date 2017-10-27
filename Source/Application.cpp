@@ -11,19 +11,19 @@ Application::Application(const Config& config)
 }
 
 void Application::handleEvents() {
-    sf::Event event{};
-    while (m_window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            m_window.close();
-        }
-    }
+//    sf::Event event{};
+//    while (m_window.pollEvent(event)) {
+//        if (event.type == sf::Event::Closed) {
+//            m_window.close();
+//        }
+//    }
 }
 
 void Application::run() {
     while (m_window.isOpen()) {
+        m_scene->handleEvents(m_window);
         m_fpsCounter->update();
         m_scene->update();
-        handleEvents();
 
         m_window.clear(sf::Color::Black);
         m_scene->render(m_renderer);

@@ -48,3 +48,7 @@ void MenuScene::update() {
 const std::string MenuScene::nextScene() const {
     return "GameScene";
 }
+
+void MenuScene::handleEvents(sf::RenderWindow& window) {
+
+}

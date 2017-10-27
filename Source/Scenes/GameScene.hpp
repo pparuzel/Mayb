@@ -18,6 +18,8 @@ public:
     void render(const RenderManager& renderer) override;
 
     const std::string nextScene() const override;
+
+    void handleEvents(sf::RenderWindow& window) override;
 };
 
 

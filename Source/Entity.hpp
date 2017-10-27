@@ -28,8 +28,8 @@ public:
     void readObject() override;
 
     ~Entity() override {
-        writeObject();
-        readObject();
+//        writeObject();
+//        readObject();
     }
 };
 

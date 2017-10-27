@@ -24,6 +24,9 @@ public:
 
     const std::string nextScene() const override;
 
+    // TODO handle events
+    void handleEvents(sf::RenderWindow& window) override;
+
 private:
     void showLogo();
 

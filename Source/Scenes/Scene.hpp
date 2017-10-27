@@ -12,6 +12,7 @@ public:
     virtual const std::string nextScene() const = 0;
     virtual void update() = 0;
     virtual void render(const RenderManager&) = 0;
+    virtual void handleEvents(sf::RenderWindow&) = 0;
 
     virtual ~Scene() = default;
 };

@@ -12,10 +12,20 @@ void GameScene::update() {
 }
 
 void GameScene::render(const RenderManager& renderer) {
+    // TODO Event handling for every scene
     m_world.render(renderer);
     // TODO Possible HUD rendering here...
 }
 
 const std::string GameScene::nextScene() const {
     return "MenuScene";
+}
+
+void GameScene::handleEvents(sf::RenderWindow& window) {
+    sf::Event event{};
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
+            window.close();
+        }
+    }
 }

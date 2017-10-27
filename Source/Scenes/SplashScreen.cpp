@@ -61,3 +61,7 @@ void SplashScreen::showLogo() {
 const std::string SplashScreen::nextScene() const {
     return "MenuScene";
 }
+
+void SplashScreen::handleEvents(sf::RenderWindow& window) {
+
+}
