@@ -1,9 +1,9 @@
 #include "Entity.hpp"
 
-Entity::Entity(sf::Vector2i size, sf::Vector2f position, sf::Vector2i offset, const std::string& metaname)
+Entity::Entity(sf::Vector2i size, sf::Vector2f position, sf::Vector2i offset)
         : m_size(size), m_position(position), m_velocity({0.f, 0.f}),
           m_bounds(m_position, size), grounded(false),
-          Renderable(offset, size), Serializable(metaname) {
+          Renderable(offset, size), Serializable() {
     m_sprite.setTextureRect(m_indicator);
     m_sprite.setPosition(position);
 }
@@ -32,7 +32,7 @@ Collider& Entity::AABBox() {
 }
 
 void Entity::writeObject() {
-    std::ofstream f(filepath, f.binary);
+    std::ofstream f(filepath + "Entity.ser", f.binary);
     write(f, m_position);
     write(f, m_velocity);
     write(f, m_size);
@@ -43,7 +43,7 @@ void Entity::readObject() {
     sf::Vector2f pos;
     sf::Vector2f vel;
     sf::Vector2i siz;
-    std::ifstream f(filepath, f.binary);
+    std::ifstream f(filepath + "Entity.ser", f.binary);
     read(f, pos);
     read(f, vel);
     read(f, siz);

@@ -15,8 +15,7 @@ protected:
     sf::Vector2f    m_position;
     bool            grounded;
 public:
-    explicit Entity(sf::Vector2i size, sf::Vector2f position={0, 0}, sf::Vector2i offset={0, 0},
-                    const std::string& metaname="Entity");
+    explicit Entity(sf::Vector2i size, sf::Vector2f position={0, 0}, sf::Vector2i offset={0, 0});
 
     void resolveCollision(CollisionType);
 

@@ -7,6 +7,9 @@
 #include <string>
 #include <fstream>
 
+class Frame {
+    char* version;
+};
 
 class Serializable {
 protected:
@@ -22,8 +25,8 @@ protected:
         file.write(reinterpret_cast<char*>(&var), sizeof var);
     }
 public:
-    explicit Serializable(const std::string& classname) {
-        filepath = "../Saves/" + classname + ".ser";
+    explicit Serializable() {
+        filepath = "../Saves/";
     }
 
     virtual void writeObject() = 0;

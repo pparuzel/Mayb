@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
 Player::Player(sf::Vector2f position)
-        : Entity{{80, 110}, position, {0, 0}, "Player"}, m_animCounter(0) {
+        : Entity{{80, 110}, position}, m_animCounter(0) {
     m_texture.loadFromFile("../Resources/World/player.png");
     m_texture_mirror.loadFromFile("../Resources/World/player_mirror.png");
     m_sprite.setTexture(m_texture);
