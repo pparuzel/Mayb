@@ -7,10 +7,6 @@
 #include <string>
 #include <fstream>
 
-class Frame {
-    char* version;
-};
-
 class Serializable {
 protected:
     std::string filepath = "";
