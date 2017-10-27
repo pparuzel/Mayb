@@ -2,7 +2,7 @@
 
 SpriteBuilder::SpriteBuilder() : m_textures(), m_sprites(), m_positions() {}
 
-void SpriteBuilder::build(std::string imagepath, const sf::Vector2f &position) {
+void SpriteBuilder::build(std::string imagepath, const sf::Vector2f& position) {
     // Concurrency fails because of sprite.setTexture(m_textures.back());
     // TODO think of a better (concurrent) solution
     std::unique_ptr<sf::Texture> texture = std::make_unique<sf::Texture>();

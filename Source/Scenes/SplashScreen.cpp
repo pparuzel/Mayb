@@ -63,5 +63,8 @@ const std::string SplashScreen::nextScene() const {
 }
 
 void SplashScreen::handleEvents(sf::RenderWindow& window) {
+    sf::Event event{};
+    while (window.pollEvent(event)) {
 
+    }
 }

@@ -9,7 +9,6 @@ MenuScene::MenuScene(const Config& config, const FPSCounter& fpsCounter,
     m_buttons.build("MainMenu/load_button.png", {360, 320});
     m_buttons.build("MainMenu/exit_button.png", {360, 440});
     m_numberOfButtons = 3;
-    m_locked = true;
 }
 
 void MenuScene::render(const RenderManager& renderer) {
@@ -19,7 +18,7 @@ void MenuScene::render(const RenderManager& renderer) {
     }
     sf::RectangleShape indicator({548, 96});
     indicator.setFillColor(sf::Color{255, 255, 255, 80});
-    indicator.setPosition(360, 200 + 120*m_currentButton);
+    indicator.setPosition(360, 200 + 120 * m_currentButton);
     renderer.drawSFML(indicator);
 }
 
@@ -35,20 +34,27 @@ void MenuScene::update() {
             default:
                 break;
         }
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and not m_locked) {
-        m_currentButton = --m_currentButton < 0 ? m_numberOfButtons-1 : m_currentButton;
-        m_locked = true;
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) and not m_locked) {
-        m_currentButton = ++m_currentButton > m_numberOfButtons-1 ? 0 : m_currentButton;
-        m_locked = true;
-    } else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)
-            and not sf::Keyboard::isKeyPressed(sf::Keyboard::S)) m_locked = false;
+//    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and not m_locked) {
+//        m_currentButton = --m_currentButton < 0 ? m_numberOfButtons-1 : m_currentButton;
+//        m_locked = true;
+//    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) and not m_locked) {
+//        m_currentButton = ++m_currentButton > m_numberOfButtons-1 ? 0 : m_currentButton;
+//        m_locked = true;
+//    } else if (not sf::Keyboard::isKeyPressed(sf::Keyboard::W)
+//            and not sf::Keyboard::isKeyPressed(sf::Keyboard::S)) m_locked = false;
+}
+
+void MenuScene::handleEvents(sf::RenderWindow& window) {
+    sf::Event event{};
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Return) {
+
+            }
+        }
+    }
 }
 
 const std::string MenuScene::nextScene() const {
     return "GameScene";
-}
-
-void MenuScene::handleEvents(sf::RenderWindow& window) {
-
 }

@@ -6,10 +6,12 @@
 #include "../Utils/FPSCounter.hpp"
 #include "../Player/Player.hpp"
 #include "../World/World.hpp"
+#include "PopUpMenu.hpp"
 
 class GameScene : public Scene {
     World               m_world;
     const FPSCounter&   m_counter;
+    PopUpMenu           popUpMenu;
 public:
     GameScene(const Config&, const FPSCounter& );
 
