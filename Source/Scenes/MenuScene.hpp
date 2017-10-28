@@ -12,9 +12,8 @@
 class MenuScene : public Scene {
     const FPSCounter&   m_fpsCounter;
     SpriteBuilder       m_buttons;
-    int                 m_currentButton;
-    int                 m_numberOfButtons;
-    bool                m_locked;
+    signed char         m_currentButton;
+    unsigned char       m_numberOfButtons;
 public:
     explicit MenuScene(const Config&, const FPSCounter&);
 
@@ -24,7 +23,6 @@ public:
 
     const std::string nextScene() const override;
 
-    // TODO handle events
     void handleEvents(sf::RenderWindow& window) override;
 };
 

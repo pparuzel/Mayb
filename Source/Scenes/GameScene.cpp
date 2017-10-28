@@ -14,7 +14,6 @@ void GameScene::update() {
 }
 
 void GameScene::render(const RenderManager& renderer) {
-    // TODO Event handling for every scene
     m_world.render(renderer);
     if (popUpMenu.isOpen()) {
         popUpMenu.render(renderer);
@@ -27,6 +26,10 @@ const std::string GameScene::nextScene() const {
 }
 
 void GameScene::handleEvents(sf::RenderWindow& window) {
+    if (popUpMenu.isOpen()) {
+        popUpMenu.update(window, hasFinished);
+        return;
+    }
     sf::Event event{};
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
@@ -35,9 +38,6 @@ void GameScene::handleEvents(sf::RenderWindow& window) {
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Escape) {
                 popUpMenu.toggle();
-            }
-            if (event.key.code == sf::Keyboard::Return and popUpMenu.isOpen()) {
-                hasFinished = true;
             }
         }
     }

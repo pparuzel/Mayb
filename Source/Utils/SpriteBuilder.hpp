@@ -14,7 +14,7 @@ public:
 
     void build(std::string imagepath, const sf::Vector2f& position);
 
-    const std::vector<sf::Sprite>& sprites();
+    const std::vector<sf::Sprite>& sprites() const;
 };
 
 

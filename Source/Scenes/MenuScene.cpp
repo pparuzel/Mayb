@@ -42,9 +42,9 @@ void MenuScene::handleEvents(sf::RenderWindow& window) {
                         break;
                 }
             } else if (event.key.code == sf::Keyboard::W) {
-                m_currentButton = --m_currentButton < 0 ? m_numberOfButtons-1 : m_currentButton;
+                m_currentButton = --m_currentButton < 0 ? char(m_numberOfButtons-1) : m_currentButton;
             } else if (event.key.code == sf::Keyboard::S) {
-                m_currentButton = ++m_currentButton > m_numberOfButtons-1 ? 0 : m_currentButton;
+                m_currentButton = ++m_currentButton > char(m_numberOfButtons-1) ? char(0) : m_currentButton;
             }
         }
     }

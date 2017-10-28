@@ -17,6 +17,6 @@ void SpriteBuilder::build(std::string imagepath, const sf::Vector2f& position) {
     m_positions.push_back(position);
 }
 
-const std::vector<sf::Sprite>& SpriteBuilder::sprites() {
+const std::vector<sf::Sprite>& SpriteBuilder::sprites() const {
     return m_sprites;
 }
