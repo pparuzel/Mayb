@@ -7,7 +7,7 @@
 #include "Maths/Collider.hpp"
 
 
-class Entity : public Renderable, Serializable {
+class Entity : public Renderable, public Serializable {
     sf::Vector2i    m_size;
     Collider        m_bounds;
 protected:

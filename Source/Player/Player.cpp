@@ -30,7 +30,7 @@ void Player::handleKeyboardInput(float dt) {
         }
     }
     m_animCounter = (m_animCounter + 1) % animDelay;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and grounded) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) and grounded and m_velocity.y == 0) {
         m_velocity.y = -20.f;
         grounded = false;
     }
@@ -52,4 +52,21 @@ void Player::move() {
     m_position.y += m_velocity.y;
     m_sprite.setPosition(m_position);
     m_sprite.setTextureRect(m_indicator);
+}
+
+void Player::writeObject() {
+    std::ofstream f(filepath + "Player.ser", f.binary);
+    write(f, m_position);
+    write(f, m_velocity);
+    f.close();
+}
+
+void Player::readObject() {
+    sf::Vector2f pos;
+    sf::Vector2f vel;
+    std::ifstream f(filepath + "Player.ser", f.binary);
+    read(f, pos);
+    read(f, vel);
+    f.close();
+    printf("{%f,%f}, {%f,%f}\n", pos.x, pos.y, vel.x, vel.y);
 }

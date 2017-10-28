@@ -9,7 +9,7 @@
 
 class Serializable {
 protected:
-    std::string filepath = "";
+    const std::string filepath = "../Saves/";
 
     template<typename T>
     void read(std::ifstream& file, T& var) {
@@ -21,9 +21,7 @@ protected:
         file.write(reinterpret_cast<char*>(&var), sizeof var);
     }
 public:
-    explicit Serializable() {
-        filepath = "../Saves/";
-    }
+    explicit Serializable() = default;
 
     virtual void writeObject() = 0;
     virtual void readObject() = 0;

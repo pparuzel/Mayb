@@ -20,6 +20,10 @@ public:
 private:
     static constexpr float  speed = 500.f;
     static constexpr int    animDelay = 14;
+
+    void writeObject() override;
+
+    void readObject() override;
 };
 
 
