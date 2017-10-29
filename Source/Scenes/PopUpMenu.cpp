@@ -19,7 +19,7 @@ void PopUpMenu::update(sf::RenderWindow& window, bool& requestClose) {
     sf::Event event{};
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
-            requestClose = true;
+            window.close();
         }
         if (event.type == sf::Event::KeyPressed) {
             if (event.key.code == sf::Keyboard::Return) {
