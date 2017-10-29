@@ -5,3 +5,5 @@ cmake-build-debug/
 /Doxyfile
 /DocsWithCirculation/
 /Docs/
+/Resources/temp/
+/cmake_modules/
