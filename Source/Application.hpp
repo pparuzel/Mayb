@@ -19,8 +19,6 @@ class Application {
 public:
     explicit Application(const Config&);
 
-    void handleEvents();
-
     void run();
 private:
     void changeScene();
