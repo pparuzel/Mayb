@@ -5,7 +5,7 @@ Application::Application(const Config& config)
 
     m_fpsCounter = std::make_unique<FPSCounter>();
     m_scene = std::make_unique<SplashScreen>(config, *m_fpsCounter);
-    m_window.create(sf::VideoMode(config.width, config.height), "Mayb2D");
+    m_window.create(sf::VideoMode(config.width, config.height), "Mayb2D", sf::Style::Close);
     m_window.setFramerateLimit(config.fps_cap);
     m_window.setVerticalSyncEnabled(config.isVSyncOn);
 }
