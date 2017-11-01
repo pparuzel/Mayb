@@ -5,7 +5,7 @@ Collider::Collider(sf::Vector2f& position, sf::Vector2i bodySize,
         : m_position(position), m_bodySize(bodySize),
           m_hMargin(horizMargin), m_vMargin(vertMargin) {}
 
-CollisionType Collider::detectCollision(const Collider& c, sf::Vector2f change) {
+CollisionType Collider::detectRectCollision(const Collider& c, sf::Vector2f change) {
     float l = m_position.x - m_hMargin.x;
     float r = m_position.x + m_bodySize.x + m_hMargin.y;
     float t = m_position.y - m_vMargin.x;

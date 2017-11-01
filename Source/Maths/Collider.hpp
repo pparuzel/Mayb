@@ -21,7 +21,7 @@ public:
     Collider(sf::Vector2f& position, sf::Vector2i bodySize,
              sf::Vector2i horizMargin={0, 0}, sf::Vector2i vertMargin={0, 0});
 
-    CollisionType detectCollision(const Collider&, sf::Vector2f);
+    CollisionType detectRectCollision(const Collider&, sf::Vector2f);
 
     void setMargin(int top, int bottom, int left, int right);
 };
