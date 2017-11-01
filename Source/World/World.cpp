@@ -28,7 +28,7 @@ void World::handleCollision() {
     CollisionType collType;
     for (std::shared_ptr<Entity>& ent : m_entities) {
         for (const std::shared_ptr<Block>& block : m_blocks) {
-            collType = ent->AABBox().detectCollision(block->AABBox(), ent->velocity());
+            collType = ent->AABBox().detectRectCollision(block->AABBox(), ent->velocity());
                 ent->resolveCollision(collType);
         }
     }
