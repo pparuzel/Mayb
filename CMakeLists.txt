@@ -42,6 +42,17 @@ set(SOURCE_FILES
         Source/World/Objects/GameObject.cpp
         Source/World/Objects/GameObject.hpp
         Source/States/Serializable.hpp
+        Source/WorldMaker/WorldMaker.cpp
+        Source/WorldMaker/WorldMaker.hpp
+        Source/Utils/Stash.cpp
+        Source/Utils/Stash.hpp
+        Source/WorldMaker/Button.cpp
+        Source/WorldMaker/Button.hpp
+        Source/WorldMaker/States/IFunctionState.hpp
+        Source/WorldMaker/States/NoFunction.cpp
+        Source/WorldMaker/States/NoFunction.hpp
+        Source/WorldMaker/States/FunctionManager.cpp
+        Source/WorldMaker/States/FunctionManager.hpp
         )
 add_executable(MaybSFML ${SOURCE_FILES})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
