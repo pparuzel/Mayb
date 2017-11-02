@@ -4,14 +4,16 @@
 
 #include <SFML/Graphics.hpp>
 #include <utility>
-#include "../Utils/Stash.hpp"
 
 class Button : public sf::Sprite {
     std::string m_id;
 public:
-    explicit Button(const Stash& stash, std::string id)
-            : sf::Sprite(stash.getSprite(id)), m_id(std::move(id)) {
+    explicit Button(std::string id, sf::Texture* texture, sf::IntRect rect)
+            : m_id(std::move(id)), sf::Sprite(*texture, rect) {
     }
+    // TODO sprite by const ref or value?
+    explicit Button(std::string id, sf::Sprite sprite)
+            : m_id(std::move(id)), sf::Sprite(std::move(sprite)) {}
 
     const std::string& getID() const {
         return m_id;

@@ -3,29 +3,23 @@
 
 
 #include <SFML/Graphics/Texture.hpp>
-#include <map>
 #include <SFML/Graphics/Sprite.hpp>
+#include <map>
 
 class Stash {
     sf::Texture                         m_tileset;
-    std::map<std::string, sf::Vector2i> m_tileTypeMap;
+    std::map<std::string, sf::IntRect>  m_tileTypeMap;
 public:
     Stash() {
         m_tileset.loadFromFile("../Resources/World/tileset.png");
     }
 
-    void add(const std::string& tileTypeName, sf::Vector2i&& tilePos) {
-        m_tileTypeMap.insert({tileTypeName, tilePos});
+    void add(const std::string& tileTypeName, int x, int y) {
+        m_tileTypeMap.insert({tileTypeName, sf::IntRect(x, y, 70, 70)});
     }
 
     sf::Sprite getSprite(const std::string& tileTypeName) const {
-        const sf::Vector2i& tileRect = m_tileTypeMap.find(tileTypeName)->second;
-        sf::IntRect rect(tileRect, {70, 70});
-        return sf::Sprite(m_tileset, rect);
-    }
-
-    std::size_t size() {
-        return m_tileTypeMap.size();
+        return sf::Sprite(m_tileset, m_tileTypeMap.find(tileTypeName)->second);
     }
 
     const auto& data() const {
