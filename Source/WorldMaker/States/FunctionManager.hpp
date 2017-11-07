@@ -16,86 +16,29 @@ class FunctionManager {
     Stash                           m_stash;
     int                             m_stateID{1};
 public:
-    FunctionManager() : m_currentState(std::make_unique<NoFunction>(*this)) {
-        setupTools();
-    }
+    FunctionManager();
 
-    void handleEvents(sf::RenderWindow& window) {
-        sf::Event e{};
-        while (window.pollEvent(e)) {
-            if (e.type == e.Closed)                  { window.close(); }
-            else if (e.type == e.MouseButtonPressed) { mousePressed(e.mouseButton); }
-            else if (e.type == e.MouseMoved)         { mouseMoved(e.mouseMove); }
-            else if (e.type == e.KeyPressed) {
-                if (e.key.code == sf::Keyboard::Num1 and m_stateID != 1) {
-                    selectFunction<NoFunction>();
-                    m_stateID = 1;
-                } else if (e.key.code == sf::Keyboard::Num2 and m_stateID != 2) {
-                    selectFunction<PlacerFunction>();
-                    m_stateID = 2;
-                }
-            }
-        }
-    }
+    void handleEvents(sf::RenderWindow& window);
 
-    void render(const RenderManager& renderer) {
-        sf::Vertex points[] = { sf::Vertex(sf::Vector2f(0, 140)), sf::Vertex(sf::Vector2f(0, 910)) };
-        for (int i=0; i<40; i++) {
-            points[0].position.x = i*35;
-            points[1].position.x = i*35;
-            renderer.drawSFML(points, 2, sf::Lines);
-        }
-        points[0].position = {0, 140};
-        points[1].position = {1260, 140};
-        for (int i=4; i<26; i++) {
-            points[0].position.y = i*35;
-            points[1].position.y = i*35;
-            renderer.drawSFML(points, 2, sf::Lines);
-        }
-        for (const auto& item : m_buttons) {
-            renderer.loadSprite(item);
-        }
-        m_currentState->render(renderer);
-        for (const auto& item : m_blocks) {
-            renderer.loadSprite(item);
-        }
-    }
+    void render(const RenderManager& renderer);
 
     // TODO ZMIENIC BUTTON NA BLOCK
     void addBlock(const sf::Sprite& b) {
         m_blocks.push_back(b);
     }
 
-    const std::vector<Button>& buttons() const {
-        return m_buttons;
-    }
+    const std::vector<Button>& buttons() const;
 
     template<typename T>
     void selectFunction() {
         m_currentState.reset(new T(*this));
     }
 private:
-    void mousePressed(sf::Event::MouseButtonEvent buttonInfo) {
-        m_currentState->mousePressed(buttonInfo.x, buttonInfo.y);
-    }
+    void mousePressed(sf::Event::MouseButtonEvent buttonInfo);
 
-    void mouseMoved(sf::Event::MouseMoveEvent buttonInfo) {
-        if (buttonInfo.y > 140) {
-            m_currentState->mouseMoved(buttonInfo.x, buttonInfo.y);
-        }
-    }
+    void mouseMoved(sf::Event::MouseMoveEvent buttonInfo);
 
-    void setupTools() {
-        m_stash.add("dirt_lrrl", 0, 0);
-        m_stash.add("dirt_llll", 0, 70);
-        int i = 0;
-        for (const auto& elem : m_stash.data()) {
-            Button b(elem.first, m_stash.getSprite(elem.first));
-            b.setPosition(240 + 90 * i, 20);
-            m_buttons.push_back(std::move(b));
-            ++i;
-        }
-    }
+    void setupTools();
 };
 
 

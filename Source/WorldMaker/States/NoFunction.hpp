@@ -14,17 +14,11 @@ public:
         printf("NoFunction\n");
     };
 
-    void render(const RenderManager& renderer) override {
+    void render(const RenderManager& renderer) override;
 
-    }
+    void mousePressed(int posx, int posy) override;
 
-    void mousePressed(int posx, int posy) override {
-
-    }
-
-    void mouseMoved(int posx, int posy) override {
-
-    }
+    void mouseMoved(int posx, int posy) override;
 };
 
 

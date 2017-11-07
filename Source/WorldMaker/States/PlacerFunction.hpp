@@ -14,14 +14,7 @@ class PlacerFunction : public IFunctionState {
 public:
     explicit PlacerFunction(FunctionManager& fmref);
 
-    void render(const RenderManager& renderer) override {
-        auto pos = m_pinned.getPosition();
-        pos.x -= static_cast<int>(pos.x) % 35;
-        pos.y -= static_cast<int>(pos.y) % 35;
-        indicator.setPosition(pos.x, pos.y);
-        renderer.drawSFML(indicator);
-        renderer.loadSprite(m_pinned);
-    }
+    void render(const RenderManager& renderer) override;
 
     void mousePressed(int posx, int posy) override;
 
