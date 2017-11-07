@@ -1,17 +1,17 @@
-#ifndef MAYBSFML_PLACERFUNCTION_HPP
-#define MAYBSFML_PLACERFUNCTION_HPP
+#ifndef MAYBSFML_REMOVALFUNCTION_HPP
+#define MAYBSFML_REMOVALFUNCTION_HPP
 
 
 #include "IFunctionState.hpp"
 
 class FunctionManager;
 
-class PlacerFunction : public IFunctionState {
-    sf::Sprite          m_pinned;
+class RemovalFunction : public IFunctionState {
     FunctionManager&    m_manager;
     sf::RectangleShape  m_indicator;
+    sf::Vector2i        m_lastMousePos;
 public:
-    explicit PlacerFunction(FunctionManager& fmref);
+    explicit RemovalFunction(FunctionManager& fmref);
 
     void render(const RenderManager& renderer) override;
 
@@ -21,4 +21,4 @@ public:
 };
 
 
-#endif //MAYBSFML_PLACERFUNCTION_HPP
+#endif //MAYBSFML_REMOVALFUNCTION_HPP

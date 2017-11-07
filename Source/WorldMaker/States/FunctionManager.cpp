@@ -1,5 +1,9 @@
 #include "FunctionManager.hpp"
 
+#include "RemovalFunction.hpp"
+#include "NoFunction.hpp"
+#include "PlacerFunction.hpp"
+
 FunctionManager::FunctionManager() : m_currentState(std::make_unique<NoFunction>(*this)) {
     setupTools();
 }
@@ -29,6 +33,9 @@ void FunctionManager::handleEvents(sf::RenderWindow& window) {
             } else if (e.key.code == sf::Keyboard::Num2 and m_stateID != 2) {
                 selectFunction<PlacerFunction>();
                 m_stateID = 2;
+            } else if (e.key.code == sf::Keyboard::Num3 and m_stateID != 3) {
+                selectFunction<RemovalFunction>();
+                m_stateID = 3;
             }
         }
     }
@@ -67,6 +74,25 @@ void FunctionManager::mouseMoved(sf::Event::MouseMoveEvent buttonInfo) {
     }
 }
 
-const std::vector<Button>& FunctionManager::buttons() const {
-    return m_buttons;
+const sf::Sprite* FunctionManager::detectButton(int posx, int posy) const {
+    for (const sf::Sprite& item : m_buttons) {
+        if (item.getGlobalBounds().contains(posx, posy)) {
+            return &item;
+        }
+    }
+    return nullptr;
+}
+
+const sf::Sprite* FunctionManager::detectBlock(const sf::FloatRect& block) const {
+
+    for (const sf::Sprite& item : m_blocks) {
+        if (item.getGlobalBounds().intersects(block)) {
+            return &item;
+        }
+    }
+    return nullptr;
+}
+
+void FunctionManager::addBlock(const sf::Sprite& b) {
+    m_blocks.push_back(b);
 }

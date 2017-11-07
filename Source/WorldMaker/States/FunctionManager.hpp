@@ -4,10 +4,8 @@
 
 #include <memory>
 #include "IFunctionState.hpp"
-#include "NoFunction.hpp"
 #include "../../Utils/Stash.hpp"
 #include "../Button.hpp"
-#include "PlacerFunction.hpp"
 
 class FunctionManager {
     std::unique_ptr<IFunctionState> m_currentState;
@@ -22,18 +20,18 @@ public:
 
     void render(const RenderManager& renderer);
 
-    // TODO ZMIENIC BUTTON NA BLOCK
-    void addBlock(const sf::Sprite& b) {
-        m_blocks.push_back(b);
-    }
+    void addBlock(const sf::Sprite& b);
 
-    const std::vector<Button>& buttons() const;
+    const sf::Sprite* detectButton(int posx, int posy) const;
+
+    const sf::Sprite* detectBlock(const sf::FloatRect&) const;
 
     template<typename T>
     void selectFunction() {
         m_currentState.reset(new T(*this));
     }
 private:
+
     void mousePressed(sf::Event::MouseButtonEvent buttonInfo);
 
     void mouseMoved(sf::Event::MouseMoveEvent buttonInfo);
