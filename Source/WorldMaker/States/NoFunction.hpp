@@ -6,11 +6,25 @@
 #include "IFunctionState.hpp"
 #include "../../Rendering/RenderManager.hpp"
 
-class NoFunction : public IFunctionState {
-    std::vector<sf::Sprite> m_sprites;
-public:
-    NoFunction() : m_sprites() {};
+class FunctionManager;
 
+class NoFunction : public IFunctionState {
+public:
+    explicit NoFunction(FunctionManager& fmref) {
+        printf("NoFunction\n");
+    };
+
+    void render(const RenderManager& renderer) override {
+
+    }
+
+    void mousePressed(int posx, int posy) override {
+
+    }
+
+    void mouseMoved(int posx, int posy) override {
+
+    }
 };
 
 

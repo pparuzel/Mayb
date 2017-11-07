@@ -3,11 +3,17 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include "../../Rendering/RenderManager.hpp"
 
 class IFunctionState {
 protected:
     IFunctionState() = default;
 public:
+    virtual void render(const RenderManager& renderer) = 0;
+
+    virtual void mousePressed(int posx, int posy) = 0;
+
+    virtual void mouseMoved(int posx, int posy) = 0;
 
     virtual ~IFunctionState() = default;
 };

@@ -21,6 +21,8 @@ public:
     void loadSprite(const sf::Sprite &) const;
 
     void refresh(sf::Color color) const;
+
+    void drawSFML(const sf::Vertex* vertices, size_t vertexCount, sf::PrimitiveType p) const;
 };
 
 

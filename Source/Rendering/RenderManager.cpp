@@ -6,6 +6,10 @@ void RenderManager::drawSFML(const sf::Drawable& drawable) const {
     m_window.draw(drawable);
 }
 
+void RenderManager::drawSFML(const sf::Vertex* vertices, size_t vertexCount, sf::PrimitiveType p) const {
+    m_window.draw(vertices, vertexCount, p);
+}
+
 void RenderManager::drawBlock(const Block& block) const {
     m_window.draw(block.sprite());
 }
