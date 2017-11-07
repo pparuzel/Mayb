@@ -58,10 +58,10 @@ void FunctionManager::render(const RenderManager& renderer) {
     for (const auto& item : m_buttons) {
         renderer.loadSprite(item);
     }
-    m_currentState->render(renderer);
     for (const auto& item : m_blocks) {
         renderer.loadSprite(item);
     }
+    m_currentState->render(renderer);
 }
 
 void FunctionManager::mousePressed(sf::Event::MouseButtonEvent buttonInfo) {
@@ -83,16 +83,23 @@ const sf::Sprite* FunctionManager::detectButton(int posx, int posy) const {
     return nullptr;
 }
 
-const sf::Sprite* FunctionManager::detectBlock(const sf::FloatRect& block) const {
-
-    for (const sf::Sprite& item : m_blocks) {
-        if (item.getGlobalBounds().intersects(block)) {
-            return &item;
+std::vector<sf::Sprite>::const_iterator FunctionManager::detectBlock(const sf::FloatRect& block) const {
+    for (auto iter = m_blocks.begin(); iter != m_blocks.end(); iter++) {
+        if (iter->getGlobalBounds().intersects(block)) {
+            return iter;
         }
     }
-    return nullptr;
+    return m_blocks.end();
 }
 
 void FunctionManager::addBlock(const sf::Sprite& b) {
     m_blocks.push_back(b);
+}
+
+void FunctionManager::removeBlock(std::vector<sf::Sprite>::const_iterator b) {
+    m_blocks.erase(b);
+}
+
+std::vector<sf::Sprite>::const_iterator FunctionManager::blocksEnd() const {
+    return m_blocks.end();
 }

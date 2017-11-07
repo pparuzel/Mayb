@@ -15,7 +15,10 @@ void RemovalFunction::render(const RenderManager& renderer) {
 }
 
 void RemovalFunction::mousePressed(int posx, int posy) {
-
+    auto block = m_manager.detectBlock(m_indicator.getGlobalBounds());
+    if (block != m_manager.blocksEnd()) {
+        m_manager.removeBlock(block);
+    }
 }
 
 void RemovalFunction::mouseMoved(int posx, int posy) {

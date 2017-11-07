@@ -26,8 +26,8 @@ void PlacerFunction::mousePressed(int posx, int posy) {
     }
     //
 
-    const sf::Sprite* block = m_manager.detectBlock(m_indicator.getGlobalBounds());
-    if (posy < 140 || block != nullptr) { return; }
+    auto block = m_manager.detectBlock(m_indicator.getGlobalBounds());
+    if (posy < 140 || block != m_manager.blocksEnd()) { return; }
     sf::Sprite b(m_pinned);
     posx -= posx % 35;
     posy -= posy % 35;

@@ -22,9 +22,13 @@ public:
 
     void addBlock(const sf::Sprite& b);
 
+    void removeBlock(std::vector<sf::Sprite, std::__1::allocator<sf::Sprite>>::const_iterator b);
+
     const sf::Sprite* detectButton(int posx, int posy) const;
 
-    const sf::Sprite* detectBlock(const sf::FloatRect&) const;
+    std::vector<sf::Sprite>::const_iterator detectBlock(const sf::FloatRect&) const;
+
+    std::vector<sf::Sprite>::const_iterator blocksEnd() const;
 
     template<typename T>
     void selectFunction() {
