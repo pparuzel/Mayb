@@ -1,5 +1,4 @@
 #include "FunctionManager.hpp"
-
 #include "RemovalFunction.hpp"
 #include "NoFunction.hpp"
 #include "PlacerFunction.hpp"
@@ -9,8 +8,9 @@ FunctionManager::FunctionManager() : m_currentState(std::make_unique<NoFunction>
 }
 
 void FunctionManager::setupTools() {
-    m_stash.add("dirt_lrrl", 0, 0);
-    m_stash.add("dirt_llll", 0, 70);
+    m_stash.add("dirtgrass_lrrl", 0, 0);
+    m_stash.add("dirtgrass_llll", 0, 70);
+    m_stash.add("dirt_llll", 0, 210);
     int i = 0;
     for (const auto& elem : m_stash.data()) {
         Button b(elem.first, m_stash.getSprite(elem.first));
@@ -36,6 +36,8 @@ void FunctionManager::handleEvents(sf::RenderWindow& window) {
             } else if (e.key.code == sf::Keyboard::Num3 and m_stateID != 3) {
                 selectFunction<RemovalFunction>();
                 m_stateID = 3;
+            } else if (e.key.code == sf::Keyboard::S and m_stateID == 1) {
+                generate();
             }
         }
     }
@@ -74,16 +76,16 @@ void FunctionManager::mouseMoved(sf::Event::MouseMoveEvent buttonInfo) {
     }
 }
 
-const sf::Sprite* FunctionManager::detectButton(int posx, int posy) const {
-    for (const sf::Sprite& item : m_buttons) {
-        if (item.getGlobalBounds().contains(posx, posy)) {
-            return &item;
+std::vector<Button>::const_iterator FunctionManager::detectButton(int posx, int posy) const {
+    for (auto iter = m_buttons.begin(); iter != m_buttons.end(); iter++) {
+        if (iter->getGlobalBounds().contains(posx, posy)) {
+            return iter;
         }
     }
-    return nullptr;
+    return m_buttons.end();
 }
 
-std::vector<sf::Sprite>::const_iterator FunctionManager::detectBlock(const sf::FloatRect& block) const {
+std::vector<Button>::const_iterator FunctionManager::detectBlock(const sf::FloatRect& block) const {
     for (auto iter = m_blocks.begin(); iter != m_blocks.end(); iter++) {
         if (iter->getGlobalBounds().intersects(block)) {
             return iter;
@@ -92,14 +94,27 @@ std::vector<sf::Sprite>::const_iterator FunctionManager::detectBlock(const sf::F
     return m_blocks.end();
 }
 
-void FunctionManager::addBlock(const sf::Sprite& b) {
+void FunctionManager::addBlock(const Button& b) {
     m_blocks.push_back(b);
 }
 
-void FunctionManager::removeBlock(std::vector<sf::Sprite>::const_iterator b) {
+void FunctionManager::removeBlock(std::vector<Button>::const_iterator b) {
     m_blocks.erase(b);
 }
 
-std::vector<sf::Sprite>::const_iterator FunctionManager::blocksEnd() const {
+std::vector<Button>::const_iterator FunctionManager::blocksEnd() const {
     return m_blocks.end();
+}
+
+std::vector<Button>::const_iterator FunctionManager::buttonsEnd() const {
+    return m_buttons.end();
+}
+
+void FunctionManager::generate() {
+    printf("Saving...\n");
+    std::ofstream file("../Resources/Maps/levelX.map");
+    for (auto& item : m_blocks) {
+        file << item.getID() << " " << item.getPosition().x << " " << item.getPosition().y-140 << "\n";
+    }
+    file.close();
 }

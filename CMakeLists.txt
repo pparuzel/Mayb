@@ -3,7 +3,13 @@ project(MaybSFML)
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+find_package(SFML 2.4 COMPONENTS system window graphics REQUIRED)
+include_directories(${SFML_INCLUDE_DIR})
+
 set(SOURCE_FILES
+        Resource_Path.cpp
+        Resource_Path.hpp
         Source/Config.hpp
         Source/Main.cpp
         Source/Application.cpp
@@ -53,8 +59,12 @@ set(SOURCE_FILES
         Source/WorldMaker/States/NoFunction.hpp
         Source/WorldMaker/States/FunctionManager.cpp
         Source/WorldMaker/States/FunctionManager.hpp
-        Source/WorldMaker/States/PlacerFunction.cpp Source/WorldMaker/States/PlacerFunction.hpp Source/WorldMaker/States/RemovalFunction.cpp Source/WorldMaker/States/RemovalFunction.hpp)
+        Source/WorldMaker/States/PlacerFunction.cpp
+        Source/WorldMaker/States/PlacerFunction.hpp
+        Source/WorldMaker/States/RemovalFunction.cpp
+        Source/WorldMaker/States/RemovalFunction.hpp
+        )
 add_executable(MaybSFML ${SOURCE_FILES})
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
-target_link_libraries(MaybSFML -lsfml-graphics -lsfml-window -lsfml-system)
+target_link_libraries(MaybSFML ${SFML_LIBRARIES})
+#target_link_libraries(MaybSFML -lsfml-graphics -lsfml-window -lsfml-system)

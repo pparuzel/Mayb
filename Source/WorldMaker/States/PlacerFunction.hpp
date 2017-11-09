@@ -3,11 +3,12 @@
 
 
 #include "IFunctionState.hpp"
+#include "../Button.hpp"
 
 class FunctionManager;
 
 class PlacerFunction : public IFunctionState {
-    sf::Sprite          m_pinned;
+    Button              m_pinned;
     FunctionManager&    m_manager;
     sf::RectangleShape  m_indicator;
 public:

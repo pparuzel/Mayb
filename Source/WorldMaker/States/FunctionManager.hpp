@@ -10,7 +10,7 @@
 class FunctionManager {
     std::unique_ptr<IFunctionState> m_currentState;
     std::vector<Button>             m_buttons;
-    std::vector<sf::Sprite>         m_blocks;
+    std::vector<Button>             m_blocks;
     Stash                           m_stash;
     int                             m_stateID{1};
 public:
@@ -20,15 +20,17 @@ public:
 
     void render(const RenderManager& renderer);
 
-    void addBlock(const sf::Sprite& b);
+    void addBlock(const Button& b);
 
-    void removeBlock(std::vector<sf::Sprite, std::__1::allocator<sf::Sprite>>::const_iterator b);
+    void removeBlock(std::vector<Button, std::__1::allocator<Button>>::const_iterator b);
 
-    const sf::Sprite* detectButton(int posx, int posy) const;
+    std::vector<Button>::const_iterator detectButton(int posx, int posy) const;
 
-    std::vector<sf::Sprite>::const_iterator detectBlock(const sf::FloatRect&) const;
+    std::vector<Button>::const_iterator detectBlock(const sf::FloatRect&) const;
 
-    std::vector<sf::Sprite>::const_iterator blocksEnd() const;
+    std::vector<Button>::const_iterator blocksEnd() const;
+
+    std::vector<Button>::const_iterator buttonsEnd() const;
 
     template<typename T>
     void selectFunction() {
@@ -41,6 +43,8 @@ private:
     void mouseMoved(sf::Event::MouseMoveEvent buttonInfo);
 
     void setupTools();
+
+    void generate();
 };
 
 

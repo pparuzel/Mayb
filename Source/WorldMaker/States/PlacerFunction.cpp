@@ -2,7 +2,7 @@
 #include "FunctionManager.hpp"
 
 PlacerFunction::PlacerFunction(FunctionManager& fmref)
-        : m_manager(fmref), m_indicator({70, 70}) {
+        : m_manager(fmref), m_indicator({70, 70}), m_pinned("", sf::Sprite()) {
     m_indicator.setFillColor({100, 255, 100, 127});
     printf("PlacerFunction\n");
 }
@@ -18,8 +18,8 @@ void PlacerFunction::render(const RenderManager& renderer) {
 }
 
 void PlacerFunction::mousePressed(int posx, int posy) {
-    const sf::Sprite* button = m_manager.detectButton(posx, posy);
-    if (button != nullptr) {
+    auto button = m_manager.detectButton(posx, posy);
+    if (button != m_manager.buttonsEnd()) {
         m_pinned = *button;
         m_pinned.setPosition(0, 140);
         return;
@@ -28,7 +28,7 @@ void PlacerFunction::mousePressed(int posx, int posy) {
 
     auto block = m_manager.detectBlock(m_indicator.getGlobalBounds());
     if (posy < 140 || block != m_manager.blocksEnd()) { return; }
-    sf::Sprite b(m_pinned);
+    Button b(m_pinned);
     posx -= posx % 35;
     posy -= posy % 35;
     b.setPosition(posx, posy);
