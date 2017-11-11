@@ -8,7 +8,7 @@ FunctionManager::FunctionManager() : m_currentState(std::make_unique<NoFunction>
 }
 
 void FunctionManager::setupTools() {
-    m_stash.add("grassround", 0, 0);
+    m_stash.add("grassround", 70, 210);
     m_stash.add("grass", 0, 70);
     m_stash.add("dirt", 0, 210);
     int i = 0;
