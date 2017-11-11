@@ -8,9 +8,9 @@ FunctionManager::FunctionManager() : m_currentState(std::make_unique<NoFunction>
 }
 
 void FunctionManager::setupTools() {
-    m_stash.add("dirtgrass_lrrl", 0, 0);
-    m_stash.add("dirtgrass_llll", 0, 70);
-    m_stash.add("dirt_llll", 0, 210);
+    m_stash.add("grassround", 0, 0);
+    m_stash.add("grass", 0, 70);
+    m_stash.add("dirt", 0, 210);
     int i = 0;
     for (const auto& elem : m_stash.data()) {
         Button b(elem.first, m_stash.getSprite(elem.first));
@@ -112,9 +112,9 @@ std::vector<Button>::const_iterator FunctionManager::buttonsEnd() const {
 
 void FunctionManager::generate() {
     printf("Saving...\n");
-    std::ofstream file("../Resources/Maps/levelX.map");
+    std::ofstream file("../Resources/Maps/levelX1.map");
     for (auto& item : m_blocks) {
-        file << item.getID() << " " << item.getPosition().x << " " << item.getPosition().y-140 << "\n";
+        file << "[" << item.getID() << "] [" << item.getPosition().x << ", " << item.getPosition().y-140 << "]\n";
     }
     file.close();
 }

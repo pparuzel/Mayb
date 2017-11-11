@@ -8,8 +8,6 @@ find_package(SFML 2.4 COMPONENTS system window graphics REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
 
 set(SOURCE_FILES
-        Resource_Path.cpp
-        Resource_Path.hpp
         Source/Config.hpp
         Source/Main.cpp
         Source/Application.cpp

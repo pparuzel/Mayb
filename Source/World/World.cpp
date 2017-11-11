@@ -2,7 +2,7 @@
 
 World::World(const Config& config)
         : WorldLoader(config), m_player(nullptr), m_isGameOver(false) {
-    load("level0.map", m_player);
+    load("levelX1.map", m_player);
 }
 
 void World::update(float frametime) {

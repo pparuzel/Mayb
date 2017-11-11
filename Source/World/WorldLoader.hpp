@@ -2,8 +2,6 @@
 #define MAYBSFML_WORLDLOADER_HPP
 
 
-#include <iostream>
-#include <fstream>
 #include <vector>
 #include "Objects/Block.hpp"
 #include "../Player/Player.hpp"
