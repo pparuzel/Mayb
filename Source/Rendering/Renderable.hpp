@@ -6,10 +6,10 @@
 
 class Renderable {
 protected:
-    sf::Texture m_texture;
-    sf::Texture m_texture_mirror;
-    sf::IntRect m_indicator;
-    sf::Sprite  m_sprite;
+    sf::Texture*    m_texture;
+    sf::Texture*    m_texture_mirror;
+    sf::IntRect     m_indicator;
+    sf::Sprite      m_sprite;
 public:
     explicit Renderable(sf::Vector2i offset, sf::Vector2i size);
 

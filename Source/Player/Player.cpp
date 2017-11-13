@@ -1,11 +1,13 @@
 #include "Player.hpp"
+#include "../TextureLoader.hpp"
 
 Player::Player(sf::Vector2f position)
         : Entity{{80, 110}, position}, m_animCounter(0) {
     AABBox().setMargin(-5, 0, 0 ,0);
-    m_texture.loadFromFile("../Resources/World/player.png");
-    m_texture_mirror.loadFromFile("../Resources/World/player_mirror.png");
-    m_sprite.setTexture(m_texture);
+    auto& tex = TextureLoader::instance();
+    m_texture = tex.add("Player", "../Resources/World/player.png");
+    m_texture_mirror = tex.add("PlayerMirror", "../Resources/World/player_mirror.png");
+    m_sprite.setTexture(*m_texture);
     m_sprite.setTextureRect(m_indicator);
 }
 
@@ -15,7 +17,7 @@ void Player::handleKeyboardInput(float dt) {
     m_indicator.top = 0;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         m_velocity.x -= speed * dt;
-        m_sprite.setTexture(m_texture_mirror);
+        m_sprite.setTexture(*m_texture_mirror);
         m_indicator.top = 110;
         m_indicator.left = 80;
         if (m_animCounter > 7) {
@@ -24,7 +26,7 @@ void Player::handleKeyboardInput(float dt) {
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         m_velocity.x += speed * dt;
-        m_sprite.setTexture(m_texture);
+        m_sprite.setTexture(*m_texture);
         m_indicator.top = 110;
         if (m_animCounter > animDelay / 2) {
             m_indicator.left = (m_indicator.left + 80) % 160;

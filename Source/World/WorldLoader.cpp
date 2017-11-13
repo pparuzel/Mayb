@@ -1,13 +1,12 @@
 #include "WorldLoader.hpp"
+#include "../TextureLoader.hpp"
 #include <iostream>
 #include <cassert>
 
 WorldLoader::WorldLoader(const Config& config_ref)
-        : m_entities(), config(config_ref), m_tiles() {
-    m_tiles.loadFromFile("../Resources/World/tiles.png");
+        : m_entities(), config(config_ref) {
+    TextureLoader::instance().add("Tiles", "../Resources/World/tileset.png");
 }
-
-// TODO Blocks take only one reference to e.g. Grass Texture
 
 std::vector<std::string> split(const std::string& str, const std::string& delimiter=" ") {
     std::vector<std::string> words;
@@ -32,6 +31,7 @@ std::vector<std::string> split(const std::string& str, const std::string& delimi
 
 void WorldLoader::load(std::string filepath, std::shared_ptr<Player>& p) {
     filepath = "../Resources/Maps/" + filepath;
+    auto* tiles_tex = TextureLoader::instance().get("Tiles");
     std::ifstream map(filepath);
     if (!map.is_open()) {
         std::cerr << "Error: Could not load map file!";
@@ -45,10 +45,10 @@ void WorldLoader::load(std::string filepath, std::shared_ptr<Player>& p) {
         float posy = strtof(words[2].c_str(), nullptr);
         sf::Vector2f block_position(posx, posy);
         sf::Vector2i block_offset;
-        if      (words[0] == "dirt") block_offset = {576, 864};
-        else if (words[0] == "grass") block_offset = {504, 576};
-        else if (words[0] == "grassround") block_offset = {648, 0};
-        m_blocks.push_back(std::make_shared<Block>(m_tiles, block_position, sf::Vector2i(70, 70), block_offset));
+        if      (words[0] == "dirt") block_offset = {0, 210};
+        else if (words[0] == "grass") block_offset = {0, 70};
+        else if (words[0] == "grassround") block_offset = {70, 210};
+        m_blocks.push_back(std::make_shared<Block>(*tiles_tex, block_position, sf::Vector2i(70, 70), block_offset));
     }
     p.reset(new Player({700.f, 100.f}));
     m_entities.push_back(p);

@@ -13,7 +13,6 @@ class WorldLoader {
 protected:
     std::vector<std::shared_ptr<Block>>     m_blocks;
     std::vector<std::shared_ptr<Entity>>    m_entities;
-    sf::Texture                             m_tiles;
 public:
     explicit WorldLoader(const Config&);
 

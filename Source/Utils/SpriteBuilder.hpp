@@ -6,9 +6,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 
 class SpriteBuilder {
-    std::vector<std::unique_ptr<sf::Texture>>   m_textures;
-    std::vector<sf::Sprite>                     m_sprites;
-    std::vector<sf::Vector2f>                   m_positions;
+    std::vector<sf::Sprite>     m_sprites;
+    std::vector<sf::Vector2f>   m_positions;
 public:
     SpriteBuilder();
 

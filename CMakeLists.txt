@@ -61,6 +61,8 @@ set(SOURCE_FILES
         Source/WorldMaker/States/PlacerFunction.hpp
         Source/WorldMaker/States/RemovalFunction.cpp
         Source/WorldMaker/States/RemovalFunction.hpp
+        Source/TextureLoader.cpp
+        Source/TextureLoader.hpp
         )
 add_executable(MaybSFML ${SOURCE_FILES})
 

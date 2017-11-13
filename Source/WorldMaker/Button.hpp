@@ -3,7 +3,6 @@
 
 
 #include <SFML/Graphics.hpp>
-#include <utility>
 
 class Button : public sf::Sprite {
     std::string m_id;
@@ -11,7 +10,7 @@ public:
     explicit Button(std::string id, sf::Texture* texture, sf::IntRect rect)
             : m_id(std::move(id)), sf::Sprite(*texture, rect) {
     }
-    // TODO sprite by const ref or value?
+
     explicit Button(std::string id, sf::Sprite sprite)
             : m_id(std::move(id)), sf::Sprite(std::move(sprite)) {}
 
