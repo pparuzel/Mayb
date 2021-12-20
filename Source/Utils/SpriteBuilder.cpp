@@ -1,17 +1,17 @@
-#include "SpriteBuilder.hpp"
-#include "../TextureLoader.hpp"
+#include "Utils/SpriteBuilder.hpp"
 
-SpriteBuilder::SpriteBuilder() : m_sprites(), m_positions() {}
+#include "TextureCache.hpp"
 
-void SpriteBuilder::build(std::string imagepath, const sf::Vector2f& position) {
+void SpriteBuilder::build(const std_fs::path& imagepath, const sf::Vector2f& position)
+{
     sf::Sprite sprite;
-    m_sprites.emplace_back();
-    imagepath = "../Resources/" + imagepath;
-    m_sprites.back().setTexture(*TextureLoader::instance().add(imagepath, imagepath));
-    m_sprites.back().setPosition(position);
-    m_positions.push_back(position);
+    sprite.setTexture(TextureCache::getInstance().fetch(imagepath, imagepath));
+    sprite.setPosition(position);
+    sprites_.emplace_back(sprite);
+    positions_.push_back(position);
 }
 
-const std::vector<sf::Sprite>& SpriteBuilder::sprites() const {
-    return m_sprites;
+const std::vector<sf::Sprite>& SpriteBuilder::sprites() const
+{
+    return sprites_;
 }

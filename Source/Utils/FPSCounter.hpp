@@ -1,20 +1,21 @@
 #ifndef MAYBSFML_FPSCOUNTER_H
 #define MAYBSFML_FPSCOUNTER_H
 
-
-#include <SFML/Graphics.hpp>
-#include <sstream>
-#include <iomanip>
 #include "../Rendering/RenderManager.hpp"
+#include <SFML/Graphics.hpp>
+#include <iomanip>
+#include <sstream>
 
-class FPSCounter {
-    sf::Clock   m_fpsTimer;
-    sf::Clock   m_tickTimer;
-    sf::Font    m_font;
-    sf::Text    m_text;
-    int         m_currentFrames;
-    float       m_fps;
-    float       m_lastTick;
+class FPSCounter
+{
+    sf::Clock fpsTimer_;
+    sf::Clock tickTimer_;
+    sf::Font font_;
+    sf::Text text_;
+    int currentFrames_;
+    float fps_;
+    float lastTick_;
+
 public:
     FPSCounter();
 
@@ -23,5 +24,4 @@ public:
     float frametime() const;
 };
 
-
-#endif //MAYBSFML_FPSCOUNTER_H
+#endif  // MAYBSFML_FPSCOUNTER_H

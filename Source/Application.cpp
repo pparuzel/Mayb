@@ -1,38 +1,44 @@
 #include "Application.hpp"
 
 Application::Application(const Config& config)
-        : m_renderer(m_window), m_config(config) {
+    : renderer_(window_)
+    , config_(config)
+{
 
-    m_fpsCounter = std::make_unique<FPSCounter>();
-    m_scene = std::make_unique<SplashScreen>(config, *m_fpsCounter);
-    m_window.create(sf::VideoMode(config.width, config.height), "Mayb2D", sf::Style::Close);
-    m_window.setFramerateLimit(config.fps_cap);
-    m_window.setVerticalSyncEnabled(config.isVSyncOn);
+    fpsCounter_ = std::make_unique<FPSCounter>();
+    scene_ = std::make_unique<SplashScreen>(config, *fpsCounter_);
+    window_.create(sf::VideoMode(config.width, config.height), "Mayb2D", sf::Style::Close);
+    window_.setFramerateLimit(config.fps_cap);
+    window_.setVerticalSyncEnabled(config.isVSyncOn);
 }
 
-void Application::run() {
-    while (m_window.isOpen()) {
-        m_fpsCounter->update();
-        m_scene->handleEvents(m_window);
-        m_scene->update();
+void Application::run()
+{
+    while (window_.isOpen())
+    {
+        fpsCounter_->update();
+        scene_->handleEvents(window_);
+        scene_->update();
 
-        m_window.clear(sf::Color::Black);
-        m_scene->render(m_renderer);
-        m_fpsCounter->draw(m_renderer);
-        m_window.display();
-        if (m_scene->closed())
+        window_.clear(sf::Color::Black);
+        scene_->render(renderer_);
+        fpsCounter_->draw(renderer_);
+        window_.display();
+        if (scene_->closed())
             changeScene();
     }
 }
 
-void Application::changeScene() {
+void Application::changeScene()
+{
     Scene* scene_ptr = nullptr;
-    if      (m_scene->nextScene() == "GameScene")
-        scene_ptr = new GameScene(m_config, *m_fpsCounter);
-    else if (m_scene->nextScene() == "MenuScene")
-        scene_ptr = new MenuScene(m_config, *m_fpsCounter);
-    else if (m_scene->nextScene() == "Exit")
-        m_window.close();
-    else throw "Wrong classname!\n";
-    m_scene.reset(scene_ptr);
+    if (scene_->nextScene() == "GameScene")
+        scene_ptr = new GameScene(config_, *fpsCounter_);
+    else if (scene_->nextScene() == "MenuScene")
+        scene_ptr = new MenuScene(config_, *fpsCounter_);
+    else if (scene_->nextScene() == "Exit")
+        window_.close();
+    else
+        throw "Wrong classname!\n";
+    scene_.reset(scene_ptr);
 }

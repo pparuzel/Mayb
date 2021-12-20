@@ -1,16 +1,16 @@
 #ifndef MAYBSFML_WORLD_HPP
 #define MAYBSFML_WORLD_HPP
 
-
+#include "../Config.hpp"
+#include "../Player/Player.hpp"
+#include "../Rendering/RenderManager.hpp"
 #include "Objects/Block.hpp"
 #include "WorldLoader.hpp"
-#include "../Rendering/RenderManager.hpp"
-#include "../Player/Player.hpp"
-#include "../Config.hpp"
 
-class World : public WorldLoader {
-    std::shared_ptr<Player> m_player;
-    bool                    m_isGameOver;
+class World : public WorldLoader
+{
+    std::shared_ptr<Player> player_;
+    bool isGameOver_;
 
 public:
     explicit World(const Config&);
@@ -24,5 +24,4 @@ public:
     bool isGameOver();
 };
 
-
-#endif //MAYBSFML_WORLD_HPP
+#endif  // MAYBSFML_WORLD_HPP

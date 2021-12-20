@@ -1,37 +1,32 @@
 #ifndef MAYBSFML_SPLASHSCREEN_HPP
 #define MAYBSFML_SPLASHSCREEN_HPP
 
+#include "Config.hpp"
+#include "Scenes/Scene.hpp"
+#include "Utils/FPSCounter.hpp"
 
-#include <iostream>
-#include "../Utils/FPSCounter.hpp"
-#include "../Config.hpp"
-#include "Scene.hpp"
+class SplashScreen : public Scene
+{
+    std::vector<sf::Sprite> sprites_;
+    std::vector<sf::Texture> textures_;
+    const FPSCounter& fpsCounter_;
+    float counter_;
+    int trans_;
+    int direction_;
 
-
-class SplashScreen : public Scene {
-    std::vector<sf::Sprite>     m_sprites;
-    std::vector<sf::Texture>    m_textures;
-    const FPSCounter&           m_fpsCounter;
-    float                       m_counter;
-    int                         m_trans;
-    int                         m_direction;
 public:
     SplashScreen(const Config&, const FPSCounter& fpsCounter);
 
     void update() override;
-
     void render(const RenderManager& renderer) override;
-
-    const std::string nextScene() const override;
-
+    [[nodiscard]] std::string_view nextScene() const override;
     void handleEvents(sf::RenderWindow& window) override;
 
 private:
     void showLogo();
 
     static constexpr float transitionDelay = .1f;
-    static constexpr int   precision       = 255;
+    static constexpr int precision = 255;
 };
 
-
-#endif //MAYBSFML_SPLASHSCREEN_HPP
+#endif  // MAYBSFML_SPLASHSCREEN_HPP

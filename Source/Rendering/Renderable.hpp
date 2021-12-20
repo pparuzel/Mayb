@@ -1,15 +1,16 @@
 #ifndef MAYBSFML_RENDERABLE_HPP
 #define MAYBSFML_RENDERABLE_HPP
 
-
 #include <SFML/Graphics.hpp>
 
-class Renderable {
+class Renderable
+{
 protected:
-    sf::Texture*    m_texture;
-    sf::Texture*    m_texture_mirror;
-    sf::IntRect     m_indicator;
-    sf::Sprite      m_sprite;
+    const sf::Texture* texture_;
+    const sf::Texture* texture_mirror_;
+    sf::IntRect indicator_;
+    sf::Sprite sprite_;
+
 public:
     explicit Renderable(sf::Vector2i offset, sf::Vector2i size);
 
@@ -18,5 +19,4 @@ public:
     virtual ~Renderable() = default;
 };
 
-
-#endif //MAYBSFML_RENDERABLE_HPP
+#endif  // MAYBSFML_RENDERABLE_HPP

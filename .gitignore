@@ -7,3 +7,5 @@ cmake-build-debug/
 /Docs/
 /Resources/temp/
 /cmake_modules/
+.vscode
+build

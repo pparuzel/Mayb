@@ -1,18 +1,19 @@
 #ifndef MAYBSFML_FUNCTIONMANAGER_HPP
 #define MAYBSFML_FUNCTIONMANAGER_HPP
 
-
-#include <memory>
-#include "IFunctionState.hpp"
 #include "../../Utils/Stash.hpp"
 #include "../Button.hpp"
+#include "IFunctionState.hpp"
+#include <memory>
 
-class FunctionManager {
-    std::unique_ptr<IFunctionState> m_currentState;
-    std::vector<Button>             m_buttons;
-    std::vector<Button>             m_blocks;
-    Stash                           m_stash;
-    int                             m_stateID{1};
+class FunctionManager
+{
+    std::unique_ptr<IFunctionState> currentState_;
+    std::vector<Button> buttons_;
+    std::vector<Button> blocks_;
+    Stash stash_;
+    int stateID_{1};
+
 public:
     FunctionManager();
 
@@ -32,12 +33,13 @@ public:
 
     std::vector<Button>::const_iterator buttonsEnd() const;
 
-    template<typename T>
-    void selectFunction() {
-        m_currentState.reset(new T(*this));
+    template <typename T>
+    void selectFunction()
+    {
+        currentState_.reset(new T(*this));
     }
-private:
 
+private:
     void mousePressed(sf::Event::MouseButtonEvent buttonInfo);
 
     void mouseMoved(sf::Event::MouseMoveEvent buttonInfo);
@@ -47,5 +49,4 @@ private:
     void generate();
 };
 
-
-#endif //MAYBSFML_FUNCTIONMANAGER_HPP
+#endif  // MAYBSFML_FUNCTIONMANAGER_HPP

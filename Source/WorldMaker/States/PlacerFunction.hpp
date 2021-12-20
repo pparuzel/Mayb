@@ -1,16 +1,17 @@
 #ifndef MAYBSFML_PLACERFUNCTION_HPP
 #define MAYBSFML_PLACERFUNCTION_HPP
 
-
-#include "IFunctionState.hpp"
 #include "../Button.hpp"
+#include "IFunctionState.hpp"
 
 class FunctionManager;
 
-class PlacerFunction : public IFunctionState {
-    Button              m_pinned;
-    FunctionManager&    m_manager;
-    sf::RectangleShape  m_indicator;
+class PlacerFunction : public IFunctionState
+{
+    Button pinned_;
+    FunctionManager& manager_;
+    sf::RectangleShape indicator_;
+
 public:
     explicit PlacerFunction(FunctionManager& fmref);
 
@@ -21,5 +22,4 @@ public:
     void mouseMoved(int posx, int posy) override;
 };
 
-
-#endif //MAYBSFML_PLACERFUNCTION_HPP
+#endif  // MAYBSFML_PLACERFUNCTION_HPP

@@ -1,39 +1,51 @@
 #include "World.hpp"
 
 World::World(const Config& config)
-        : WorldLoader(config), m_player(nullptr), m_isGameOver(false) {
-    load("levelX1.map", m_player);
+    : WorldLoader(config)
+    , player_(nullptr)
+    , isGameOver_(false)
+{
+    load("levelX1.map", player_);
 }
 
-void World::update(float frametime) {
-    m_player->update(frametime);
+void World::update(float frametime)
+{
+    player_->update(frametime);
     handleCollision();
-    m_player->move();
-    if (m_player->sprite().getPosition().y > 1000) {
-        m_isGameOver = true;
+    player_->move();
+    if (player_->sprite().getPosition().y > 1000)
+    {
+        isGameOver_ = true;
     }
 }
 
-void World::render(const RenderManager& renderer) {
+void World::render(const RenderManager& renderer)
+{
     renderer.refresh(sf::Color{153, 204, 255});
-    for (const std::shared_ptr<Block>& block : m_blocks) {
+    for (const std::shared_ptr<Block>& block : blocks_)
+    {
         renderer.drawBlock(*block);
     }
-    for (const std::shared_ptr<Entity>& ent : m_entities) {
+    for (const std::shared_ptr<Entity>& ent : entities_)
+    {
         renderer.drawEntity(*ent);
     }
 }
 
-void World::handleCollision() {
+void World::handleCollision()
+{
     CollisionType collType;
-    for (std::shared_ptr<Entity>& ent : m_entities) {
-        for (const std::shared_ptr<Block>& block : m_blocks) {
+    for (std::shared_ptr<Entity>& ent : entities_)
+    {
+        for (const std::shared_ptr<Block>& block : blocks_)
+        {
             collType = ent->AABBox().detectRectCollision(block->AABBox(), ent->velocity());
-                ent->resolveCollision(collType);
+            ent->resolveCollision(collType);
         }
     }
 }
 
-bool World::isGameOver() {
-    return m_isGameOver;
+bool World::isGameOver()
+{
+    return isGameOver_;
 }

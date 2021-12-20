@@ -1,15 +1,20 @@
 #ifndef MAYBSFML_POPUPMENU_HPP
 #define MAYBSFML_POPUPMENU_HPP
 
+#include "Rendering/RenderManager.hpp"
+#include "Utils/SpriteBuilder.hpp"
 
 #include <SFML/Graphics.hpp>
-#include "../Rendering/RenderManager.hpp"
-#include "../Utils/SpriteBuilder.hpp"
 
-class PopUpMenu {
-    SpriteBuilder   m_buttons{};
-    signed char     m_currentButton{0};
-    bool            m_isOpen{false};
+// Forward declarations
+struct Scene;
+
+class PopUpMenu
+{
+    SpriteBuilder buttons_{};
+    signed char currentButton_{0};
+    bool isOpen_{false};
+
 public:
     explicit PopUpMenu();
 
@@ -19,8 +24,7 @@ public:
 
     void render(const RenderManager& renderer);
 
-    void update(sf::RenderWindow& window, bool& requestClose);
+    void update(sf::RenderWindow& window, Scene& parentScene);
 };
 
-
-#endif //MAYBSFML_POPUPMENU_HPP
+#endif  // MAYBSFML_POPUPMENU_HPP

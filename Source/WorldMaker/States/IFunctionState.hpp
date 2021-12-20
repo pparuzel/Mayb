@@ -1,13 +1,15 @@
 #ifndef MAYBSFML_IFUNCTION_HPP
 #define MAYBSFML_IFUNCTION_HPP
 
+#include "../../Rendering/RenderManager.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "../../Rendering/RenderManager.hpp"
 
-class IFunctionState {
+class IFunctionState
+{
 protected:
     IFunctionState() = default;
+
 public:
     virtual void render(const RenderManager& renderer) = 0;
 
@@ -18,5 +20,4 @@ public:
     virtual ~IFunctionState() = default;
 };
 
-
-#endif //MAYBSFML_IFUNCTION_HPP
+#endif  // MAYBSFML_IFUNCTION_HPP

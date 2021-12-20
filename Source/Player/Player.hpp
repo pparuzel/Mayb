@@ -1,15 +1,16 @@
 #ifndef MAYBSFML_CONTROLLER_HPP
 #define MAYBSFML_CONTROLLER_HPP
 
-
-#include <SFML/Graphics.hpp>
-#include "../Rendering/RenderManager.hpp"
 #include "../Entity.hpp"
+#include "../Rendering/RenderManager.hpp"
+#include <SFML/Graphics.hpp>
 
-class Player : public Entity {
-    int m_animCounter;
+class Player : public Entity
+{
+    int animCounter_;
+
 public:
-    explicit Player(sf::Vector2f position={0, 0});
+    explicit Player(sf::Vector2f position = {0, 0});
 
     void handleKeyboardInput(float);
 
@@ -18,13 +19,12 @@ public:
     void move();
 
 private:
-    static constexpr float  speed = 500.f;
-    static constexpr int    animDelay = 14;
+    static constexpr float speed = 500.f;
+    static constexpr int animDelay = 14;
 
     void writeObject() override;
 
     void readObject() override;
 };
 
-
-#endif //MAYBSFML_CONTROLLER_HPP
+#endif  // MAYBSFML_CONTROLLER_HPP

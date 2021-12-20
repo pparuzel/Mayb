@@ -1,72 +1,103 @@
 #include "SplashScreen.hpp"
 
+#include "Utils/ResourceManager.hpp"
+
+#include <array>
+#include <iostream>
+#include <string_view>
+#include <tuple>
+
+using namespace std::string_view_literals;
+
 SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
-        : m_fpsCounter(fpsCounter), m_sprites(3), m_textures(3),
-          m_counter(0), m_trans(0), m_direction(1) {
-    sf::Texture tex1, tex2, tex3;
-    sf::Sprite splash1, splash2, splash3;
-    if (    !tex1.loadFromFile("../Resources/SplashScreen/splashscreen.png") ||
-            !tex2.loadFromFile("../Resources/SplashScreen/splashscreen2.png") ||
-            !tex3.loadFromFile("../Resources/SplashScreen/xd.png")) {
-        std::cerr << "Could not load SplashScreen!\n";
-        return;
+    : fpsCounter_(fpsCounter)
+    , counter_(0)
+    , trans_(0)
+    , direction_(1)
+{
+    constexpr static auto loadTexture = [](std::string_view resourceName)
+    {
+        std_fs::path path = ResourceManager::getLocation() / "SplashScreen" / resourceName;
+        sf::Texture texture;
+        if (!std_fs::exists(path) || !texture.loadFromFile(path))
+        {
+            std::cerr << "Could not load Splashscreen from path " << path << std::endl;
+        }
+        return texture;
+    };
+    static const auto SplashScreenResourceInfo = std::array{
+        std::make_pair("splashscreen.png"sv, sf::Vector2f(400.f, 300.f)),
+        std::make_pair("splashscreen2.png"sv, sf::Vector2f(1000.f, 700.f)),
+        std::make_pair("xd.png"sv, sf::Vector2f(150.f, 150.f)),
+    };
+    textures_.reserve(SplashScreenResourceInfo.size());
+    sprites_.reserve(SplashScreenResourceInfo.size());
+    for (auto&& [resourceName, position] : SplashScreenResourceInfo)
+    {
+        const auto texture = loadTexture(resourceName);
+        sprites_.emplace_back(textures_.emplace_back(texture)).setPosition(position);
     }
-    m_textures[0] = tex1;
-    m_textures[1] = tex2;
-    m_textures[2] = tex3;
-    m_sprites[0] = splash1;
-    m_sprites[1] = splash2;
-    m_sprites[2] = splash3;
-    m_sprites[0].setTexture(m_textures[0]);
-    m_sprites[0].setPosition(400, 300);
-    m_sprites[1].setTexture(m_textures[1]);
-    m_sprites[1].setPosition(1000, 700);
-    m_sprites[2].setTexture(m_textures[2]);
-    m_sprites[2].setPosition(150, 150);
 }
 
-void SplashScreen::update() {
+void SplashScreen::update()
+{
     showLogo();
-    if ((m_trans < 5 and m_direction == -1)) {
-        hasFinished = true;
+    if ((trans_ < 5 and direction_ == -1))
+    {
+        endScene();
     }
 }
 
-void SplashScreen::render(const RenderManager& renderer) {
+void SplashScreen::render(const RenderManager& renderer)
+{
     sf::Uint8 alpha = 0;
-    if (m_trans > 150)
-        alpha = static_cast<sf::Uint8>(m_trans * 255.f / precision - 150);
-    m_sprites[0].setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_trans * 255.f / precision)));
-    m_sprites[1].setColor(sf::Color(255, 255, 255, alpha));
-    m_sprites[2].setColor(sf::Color(255, 255, 255, 0));
-    if (m_direction == -1) { m_sprites[2].setColor(sf::Color(
-                255, 255, 255, alpha)); }
-    for (const auto& sprite : m_sprites) {
+    if (trans_ > 150)
+        alpha = static_cast<sf::Uint8>(trans_ * 255.f / precision - 150);
+    sprites_[0].setColor(
+        sf::Color(255, 255, 255, static_cast<sf::Uint8>(trans_ * 255.f / precision)));
+    sprites_[1].setColor(sf::Color(255, 255, 255, alpha));
+    sprites_[2].setColor(sf::Color(255, 255, 255, 0));
+    if (direction_ == -1)
+    {
+        sprites_[2].setColor(sf::Color(255, 255, 255, alpha));
+    }
+    for (const auto& sprite : sprites_)
+    {
         renderer.loadSprite(sprite);
     }
 }
 
-void SplashScreen::showLogo() {
-    m_counter += m_fpsCounter.frametime();
-    if (m_counter < 1.5f)
+void SplashScreen::showLogo()
+{
+    counter_ += fpsCounter_.frametime();
+    if (counter_ < 1.5f)
+    {
         return;
-    if (m_counter > transitionDelay) {
-        if (m_trans == precision)
-            m_direction *= -1;
-        m_counter = 1.5f;
-        m_trans += m_direction;
+    }
+    if (counter_ > transitionDelay)
+    {
+        if (trans_ == precision)
+        {
+            direction_ *= -1;
+        }
+        counter_ = 1.5f;
+        trans_ += direction_;
     }
 }
 
-const std::string SplashScreen::nextScene() const {
+std::string_view SplashScreen::nextScene() const
+{
     return "MenuScene";
 }
 
-void SplashScreen::handleEvents(sf::RenderWindow& window) {
+void SplashScreen::handleEvents(sf::RenderWindow& window)
+{
     sf::Event event{};
-    while (window.pollEvent(event)) {
-        if (event.type == event.KeyPressed) {
-            hasFinished = true;
+    while (window.pollEvent(event))
+    {
+        if (event.type == event.KeyPressed)
+        {
+            endScene();
         }
     }
 }
