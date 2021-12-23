@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.7)
 project(MaybSFML)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2.4 COMPONENTS system window graphics REQUIRED)
-include_directories(${SFML_INCLUDE_DIR})
+find_package(SFML 3.0 COMPONENTS system window graphics REQUIRED)
+include_directories(/usr/local/include)
 
 set(SOURCE_FILES
         Source/Config.hpp
@@ -66,5 +66,5 @@ set(SOURCE_FILES
         )
 add_executable(MaybSFML ${SOURCE_FILES})
 
-target_link_libraries(MaybSFML ${SFML_LIBRARIES})
-#target_link_libraries(MaybSFML -lsfml-graphics -lsfml-window -lsfml-system)
+target_link_directories(MaybSFML PUBLIC /usr/local/lib)
+target_link_libraries(MaybSFML -lsfml-graphics -lsfml-window -lsfml-system)

@@ -19,7 +19,7 @@ void RemovalFunction::render(const RenderManager& renderer) {
         pos = it->getPosition();
     }
     if (pos.y < 140) { pos.y = 140; }
-    m_indicator.setPosition(pos.x, pos.y);
+    m_indicator.setPosition({pos.x, pos.y});
     renderer.drawSFML(m_indicator);
 }
 

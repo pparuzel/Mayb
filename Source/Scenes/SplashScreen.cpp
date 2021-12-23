@@ -18,11 +18,11 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
     m_sprites[1] = splash2;
     m_sprites[2] = splash3;
     m_sprites[0].setTexture(m_textures[0]);
-    m_sprites[0].setPosition(400, 300);
+    m_sprites[0].setPosition({400, 300});
     m_sprites[1].setTexture(m_textures[1]);
-    m_sprites[1].setPosition(1000, 700);
+    m_sprites[1].setPosition({1000, 700});
     m_sprites[2].setTexture(m_textures[2]);
-    m_sprites[2].setPosition(150, 150);
+    m_sprites[2].setPosition({150, 150});
 }
 
 void SplashScreen::update() {

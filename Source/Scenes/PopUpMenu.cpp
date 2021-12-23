@@ -22,7 +22,7 @@ void PopUpMenu::update(sf::RenderWindow& window, bool& requestClose) {
             window.close();
         }
         if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Return) {
+            if (event.key.code == sf::Keyboard::Enter) {
                 switch (m_currentButton) {
                     case 0:
                         toggle();
@@ -50,13 +50,13 @@ void PopUpMenu::update(sf::RenderWindow& window, bool& requestClose) {
 void PopUpMenu::render(const RenderManager& renderer) {
     sf::RectangleShape rect({400, 570});
     rect.setFillColor(sf::Color{50, 100, 255, 50});
-    rect.setPosition(430, 110);
+    rect.setPosition({430, 110});
     renderer.drawSFML(rect);
     for (const sf::Sprite& sprite : m_buttons.sprites()) {
         renderer.drawSFML(sprite);
     }
     sf::RectangleShape indicator({380, 133});
     indicator.setFillColor(sf::Color{255, 255, 255, 80});
-    indicator.setPosition(440, 120 + 140 * m_currentButton);
+    indicator.setPosition({440.f, 120.f + 140 * m_currentButton});
     renderer.drawSFML(indicator);
 }

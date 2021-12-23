@@ -14,7 +14,7 @@ void FunctionManager::setupTools() {
     int i = 0;
     for (const auto& elem : m_stash.data()) {
         Button b(elem.first, m_stash.getSprite(elem.first));
-        b.setPosition(240 + 90 * i, 20);
+        b.setPosition({240.f + 90 * i, 20.f});
         m_buttons.push_back(std::move(b));
         ++i;
     }

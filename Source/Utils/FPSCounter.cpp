@@ -1,11 +1,16 @@
 #include "FPSCounter.hpp"
 
+#include <iostream>
+
 FPSCounter::FPSCounter()
         : m_fpsTimer(), m_currentFrames(0), m_fps(0), m_tickTimer(), m_lastTick(0) {
-    m_text.move(10, 10);
+    m_text.move({10, 10});
     m_text.setOutlineColor(sf::Color::Blue);
     m_text.setOutlineThickness(2);
-    m_font.loadFromFile("../Resources/Fonts/arial_bold.ttf");
+    if (!m_font.loadFromFile("../Resources/Fonts/arial_bold.ttf"))
+    {
+        std::cerr << "Could not load ARIAL BOLD" << std::endl;
+    }
     m_text.setFont(m_font);
     m_text.setCharacterSize(25);
 }

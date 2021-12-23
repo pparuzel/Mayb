@@ -17,7 +17,7 @@ void MenuScene::render(const RenderManager& renderer) {
     }
     sf::RectangleShape indicator({548, 96});
     indicator.setFillColor(sf::Color{255, 255, 255, 80});
-    indicator.setPosition(360, 200 + 120 * m_currentButton);
+    indicator.setPosition({360.f, 200.f + 120 * m_currentButton});
     renderer.drawSFML(indicator);
 }
 
@@ -30,7 +30,7 @@ void MenuScene::handleEvents(sf::RenderWindow& window) {
             window.close();
         }
         if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Return) {
+            if (event.key.code == sf::Keyboard::Enter) {
                 switch (m_currentButton) {
                     case 0:
                         hasFinished = true;
