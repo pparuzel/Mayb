@@ -1,9 +1,8 @@
-#include "GameScene.hpp"
+#include "Scenes/GameScene.hpp"
 
 GameScene::GameScene(const Config& config, const FPSCounter& fpsCounter)
     : world_(config)
     , counter_(fpsCounter)
-    , popUpMenu()
 {
 }
 

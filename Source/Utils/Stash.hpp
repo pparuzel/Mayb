@@ -11,8 +11,8 @@
 class Stash
 {
     const sf::Texture& tileset_ =
-        TextureCache::getInstance().fetch("Stash.tileset",
-                                          std_fs::path("World") / "tileset.png");
+        TextureCache::getInstance().load("Stash.tileset",
+                                         std_fs::path("World") / "tileset.png");
     std::map<std::string, sf::IntRect> tileTypeMap_;
 
 public:
@@ -21,12 +21,13 @@ public:
         tileTypeMap_.insert({tileTypeName, sf::IntRect(x, y, 70, 70)});
     }
 
-    sf::Sprite getSprite(const std::string& tileTypeName) const
+    sf::Sprite getSprite(
+        const std::string& tileTypeName) const  // NOLINT(modernize-use-nodiscard)
     {
         return {tileset_, tileTypeMap_.find(tileTypeName)->second};
     }
 
-    const auto& data() const { return tileTypeMap_; }
+    [[nodiscard]] const auto& data() const { return tileTypeMap_; }
 };
 
 #endif  // MAYBSFML_TEXTURESTASH_HPP

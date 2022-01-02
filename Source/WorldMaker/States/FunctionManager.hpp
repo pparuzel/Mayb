@@ -25,18 +25,18 @@ public:
 
     void removeBlock(std::vector<Button, std::__1::allocator<Button>>::const_iterator b);
 
-    std::vector<Button>::const_iterator detectButton(int posx, int posy) const;
+    [[nodiscard]] std::vector<Button>::const_iterator detectButton(int posx, int posy) const;
 
-    std::vector<Button>::const_iterator detectBlock(const sf::FloatRect&) const;
+    [[nodiscard]] std::vector<Button>::const_iterator detectBlock(const sf::FloatRect&) const;
 
-    std::vector<Button>::const_iterator blocksEnd() const;
+    [[nodiscard]] std::vector<Button>::const_iterator blocksEnd() const;
 
-    std::vector<Button>::const_iterator buttonsEnd() const;
+    [[nodiscard]] std::vector<Button>::const_iterator buttonsEnd() const;
 
     template <typename T>
     void selectFunction()
     {
-        currentState_.reset(new T(*this));
+        currentState_ = std::make_unique<T>(*this);
     }
 
 private:

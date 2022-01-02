@@ -25,7 +25,7 @@ public:
 
     static TextureCache& getInstance();
     const sf::Texture& add(const std::string& name, const sf::Texture& texture);
-    const sf::Texture& fetch(const std::string& name, const std_fs::path& path);
+    const sf::Texture& load(const std::string& name, const std_fs::path& path);
     const sf::Texture* find(const std::string& name);
 
 private:

@@ -8,7 +8,7 @@
 WorldLoader::WorldLoader(const Config& config)
     : config(config)
 {
-    TextureCache::getInstance().fetch("Tiles", std_fs::path("World") / "tileset.png");
+    TextureCache::getInstance().load("Tiles", std_fs::path("World") / "tileset.png");
 }
 
 std::vector<std::string> split(const std::string& str, const std::string& delimiter = " ")

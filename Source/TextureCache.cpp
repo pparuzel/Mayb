@@ -12,7 +12,7 @@ const sf::Texture* TextureCache::find(const std::string& name)
     return it != textures_.end() ? &it->second : nullptr;
 }
 
-const sf::Texture& TextureCache::fetch(const std::string& name, const std_fs::path& path)
+const sf::Texture& TextureCache::load(const std::string& name, const std_fs::path& path)
 {
     const auto* foundTexture = find(name);
     if (foundTexture)

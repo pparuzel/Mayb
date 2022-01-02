@@ -7,9 +7,8 @@ Player::Player(sf::Vector2f position)
     , animCounter_(0)
 {
     auto&& cache = TextureCache::getInstance();
-    texture_ = &cache.fetch("Player", std_fs::path("World") / "player.png");
-    texture_mirror_ = &cache.fetch("PlayerMirror",
-                                   std_fs::path("World") / "player_mirror.png");
+    texture_ = &cache.load("Player", std_fs::path("World") / "player.png");
+    texture_mirror_ = &cache.load("PlayerMirror", std_fs::path("World") / "player_mirror.png");
     AABBox().setMargin(-5, 0, 0, 0);
     sprite_.setTexture(*texture_);
     sprite_.setTextureRect(indicator_);

@@ -20,7 +20,7 @@ void MenuScene::render(const RenderManager& renderer)
     }
     sf::RectangleShape indicator({548, 96});
     indicator.setFillColor(sf::Color{255, 255, 255, 80});
-    indicator.setPosition({360.f, 200.f + 120.f * currentButton_});
+    indicator.setPosition({360.f, 200.f + 120.f * static_cast<float>(currentButton_)});
     renderer.drawSFML(indicator);
 }
 

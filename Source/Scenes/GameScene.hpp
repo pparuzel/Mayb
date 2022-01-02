@@ -1,11 +1,11 @@
 #ifndef MAYBSFML_GAMESCENE_HPP
 #define MAYBSFML_GAMESCENE_HPP
 
-#include "../Player/Player.hpp"
-#include "../Utils/FPSCounter.hpp"
-#include "../World/World.hpp"
-#include "PopUpMenu.hpp"
-#include "Scene.hpp"
+#include "Player/Player.hpp"
+#include "Scenes/PopUpMenu.hpp"
+#include "Scenes/Scene.hpp"
+#include "Utils/FPSCounter.hpp"
+#include "World/World.hpp"
 
 class GameScene : public Scene
 {
