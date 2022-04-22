@@ -1,12 +1,19 @@
 #ifndef MAYBSFML_CONFIG_H
 #define MAYBSFML_CONFIG_H
 
+#include <SFML/Graphics.hpp>
+
 struct Config
 {
-    const unsigned int width = 1260;
-    const unsigned int height = 770;
-    const unsigned int fps_cap = 120;
-    const bool isVSyncOn = true;
+    unsigned int width = 1260;
+    unsigned int height = 770;
+    unsigned int fpsCap = 120;
+    bool isVSyncEnabled = true;
+    bool skipSplashScreen = false;
+
+    void reconfigureWindow(sf::RenderWindow& window);
 };
+
+Config& getConfig();
 
 #endif  // MAYBSFML_CONFIG_H

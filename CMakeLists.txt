@@ -4,10 +4,12 @@ project(MaybSFML)
 set(CMAKE_CXX_STANDARD 20)
 
 find_package(SFML 3.0 COMPONENTS system window graphics REQUIRED)
+set(DEVELOPER_MODE FALSE)
 
 set(ALL_FILES
     # Source Root
     Source/Config.hpp
+    Source/Config.cpp
     Source/Main.cpp
     Source/Application.cpp
     Source/Application.hpp
@@ -40,6 +42,7 @@ set(ALL_FILES
     Source/Maths/Collider.hpp
     # Scenes
     Source/Scenes/Scene.hpp
+    Source/Scenes/Scene.cpp
     Source/Scenes/MenuScene.cpp
     Source/Scenes/MenuScene.hpp
     Source/Scenes/GameScene.cpp
@@ -48,6 +51,8 @@ set(ALL_FILES
     Source/Scenes/SplashScreen.hpp
     Source/Scenes/PopUpMenu.cpp
     Source/Scenes/PopUpMenu.hpp
+    Source/Scenes/BootloadScene.hpp
+    Source/Scenes/BootloadScene.cpp
     # World
     Source/World/World.cpp
     Source/World/World.hpp
@@ -78,18 +83,6 @@ set(ALL_FILES
 add_executable(MaybSFML ${ALL_FILES})
 
 if (DEVELOPER_MODE)
-    # Clang Format
-    add_custom_target(
-        ClangFormat
-        DEPENDS ${ALL_FILES}
-        COMMAND clang-format -i ${ALL_FILES}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMENT "Formatting files using clang-format..."
-        VERBATIM
-    )
-    add_dependencies(MaybSFML ClangFormat)
-    # Useful for external tools - ClangTidy, etc.
-    set_target_properties(MaybSFML PROPERTIES EXPORT_COMPILE_COMMANDS TRUE)
     # My mess which I don't really want to fix
     target_link_directories(MaybSFML PRIVATE /usr/local/lib)
     target_include_directories(MaybSFML PRIVATE /usr/local/include)

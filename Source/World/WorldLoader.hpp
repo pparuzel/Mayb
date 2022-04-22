@@ -11,14 +11,13 @@
 
 class WorldLoader
 {
-    const Config& config;
 
 protected:
     std::vector<std::shared_ptr<Block>> blocks_;
     std::vector<std::shared_ptr<Entity>> entities_;
 
 public:
-    explicit WorldLoader(const Config&);
+    explicit WorldLoader();
 
     void load(const std_fs::path& filepath, std::shared_ptr<Player>&);
     void reload(const std_fs::path& filepath);

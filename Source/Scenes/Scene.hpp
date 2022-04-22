@@ -1,30 +1,31 @@
 #ifndef MAYBSFML_SCENE_HPP
 #define MAYBSFML_SCENE_HPP
 
-#include "../Rendering/RenderManager.hpp"
+#include <SFML/Graphics.hpp>
+
+enum class SceneType
+{
+    SplashScreen,
+    MenuScene,
+    GameScene,
+};
 
 class Scene
 {
 public:
-    Scene() = default;
-    Scene(const Scene&) = delete;
-    Scene& operator=(const Scene&) = delete;
-    Scene(Scene&&) = default;
-    Scene& operator=(Scene&&) = delete;
+    bool updateAndRender(sf::RenderWindow& window);
+    void setBackgroundColor(sf::Color color);
+    sf::Color getBackgroundColor() const;
+
+    virtual SceneType nextScene() const = 0;
     virtual ~Scene() = default;
 
-    [[nodiscard]] bool closed() const { return hasFinished; }
-    [[nodiscard]] virtual std::string_view nextScene() const = 0;
-    virtual void update() = 0;
-    virtual void render(const RenderManager&) = 0;
-    virtual void handleEvents(sf::RenderWindow&) = 0;
-
-    void endScene() { hasFinished = true; }
-    void restartScene() { hasFinished = false; }
-    [[nodiscard]] bool sceneRunning() const { return hasFinished; }
-
 private:
-    bool hasFinished = false;
+    virtual void doUpdate() = 0;
+    virtual void doRender(sf::RenderWindow&) = 0;
+    virtual bool doHandleEvents(sf::RenderWindow&) = 0;
+
+    sf::Color backgroundColor_{sf::Color::Black};
 };
 
 #endif  // MAYBSFML_SCENE_HPP

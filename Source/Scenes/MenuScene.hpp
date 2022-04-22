@@ -1,28 +1,26 @@
 #ifndef MAYBSFML_MENUSCENE_HPP
 #define MAYBSFML_MENUSCENE_HPP
 
-#include "Config.hpp"
 #include "Rendering/RenderManager.hpp"
 #include "Scenes/Scene.hpp"
 #include "Utils/FPSCounter.hpp"
 #include "Utils/SpriteBuilder.hpp"
 
-#include <array>
-
 class MenuScene : public Scene
 {
-    const FPSCounter& fpsCounter_;
+    FPSCounter fpsCounter_;
     SpriteBuilder buttons_;
     sf::Uint8 currentButton_;
     sf::Uint8 numberOfButtons_;
 
 public:
-    explicit MenuScene(const Config&, const FPSCounter&);
+    explicit MenuScene(sf::RenderWindow& window);
+    SceneType nextScene() const override;
 
-    void update() override;
-    void render(const RenderManager& renderer) override;
-    [[nodiscard]] std::string_view nextScene() const override;
-    void handleEvents(sf::RenderWindow& window) override;
+private:
+    bool doHandleEvents(sf::RenderWindow& window) override;
+    void doUpdate() override;
+    void doRender(sf::RenderWindow& window) override;
 };
 
 #endif  // MAYBSFML_MENUSCENE_HPP

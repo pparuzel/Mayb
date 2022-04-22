@@ -9,20 +9,21 @@ class SplashScreen : public Scene
 {
     std::vector<sf::Sprite> sprites_;
     std::vector<sf::Texture> textures_;
-    const FPSCounter& fpsCounter_;
+    FPSCounter fpsCounter_;
     float counter_;
     int trans_;
     int direction_;
+    bool isRunning_;
 
 public:
-    SplashScreen(const Config&, const FPSCounter& fpsCounter);
+    explicit SplashScreen(sf::RenderWindow& window);
 
-    void update() override;
-    void render(const RenderManager& renderer) override;
-    [[nodiscard]] std::string_view nextScene() const override;
-    void handleEvents(sf::RenderWindow& window) override;
+    SceneType nextScene() const override;
 
 private:
+    void doUpdate() override;
+    void doRender(sf::RenderWindow& window) override;
+    bool doHandleEvents(sf::RenderWindow& window) override;
     void showLogo();
 
     static constexpr float transitionDelay = .1f;

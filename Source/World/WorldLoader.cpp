@@ -5,8 +5,7 @@
 #include <cassert>
 #include <iostream>
 
-WorldLoader::WorldLoader(const Config& config)
-    : config(config)
+WorldLoader::WorldLoader()
 {
     TextureCache::getInstance().load("Tiles", std_fs::path("World") / "tileset.png");
 }

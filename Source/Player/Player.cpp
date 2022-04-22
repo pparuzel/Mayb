@@ -60,10 +60,7 @@ void Player::move()
     if (not grounded and velocity_.y != 0)
     {
         indicator_.top = 0;
-        if (velocity_.y < 0.f)
-            indicator_.left = 80;
-        else
-            indicator_.left = 160;
+        indicator_.left = velocity_.y < 0.f ? 80 : 160;
     }
     position_.x += velocity_.x;
     position_.y += velocity_.y;
@@ -73,7 +70,7 @@ void Player::move()
 
 void Player::writeObject()
 {
-    std::ofstream f(filepath + "Player.ser", f.binary);
+    std::ofstream f(filepath + "Player.ser", std::ofstream::binary);
     write(f, position_);
     write(f, velocity_);
     f.close();
@@ -83,7 +80,7 @@ void Player::readObject()
 {
     sf::Vector2f pos;
     sf::Vector2f vel;
-    std::ifstream f(filepath + "Player.ser", f.binary);
+    std::ifstream f(filepath + "Player.ser", std::ofstream::binary);
     read(f, pos);
     read(f, vel);
     f.close();

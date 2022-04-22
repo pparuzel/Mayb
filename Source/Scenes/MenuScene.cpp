@@ -1,37 +1,46 @@
 #include "MenuScene.hpp"
 
-MenuScene::MenuScene(const Config& config, const FPSCounter& fpsCounter)
-    : fpsCounter_(fpsCounter)
+#include "Config.hpp"
+
+MenuScene::MenuScene(sf::RenderWindow& window)
+    : fpsCounter_()
     , currentButton_(0)
     , numberOfButtons_(3)
 {
+    auto& config = getConfig();
+    config.fpsCap = 0;
+    config.isVSyncEnabled = false;
+    config.reconfigureWindow(window);
     buttons_.build("MainMenu/menu_bg.png", {0.f, 0.f});
     buttons_.build("MainMenu/newgame_button.png", {360, 200});
     buttons_.build("MainMenu/load_button.png", {360, 320});
     buttons_.build("MainMenu/exit_button.png", {360, 440});
 }
 
-void MenuScene::render(const RenderManager& renderer)
+void MenuScene::doRender(sf::RenderWindow& window)
 {
-    renderer.refresh(sf::Color{153, 204, 255});
+    // window.clear();  // FIXME: Clears the seconds time here...
+    // sf::Color{153, 204, 255}
+    // window.clear(sf::Color::Yellow);
     for (const auto& button : buttons_.sprites())
     {
-        renderer.loadSprite(button);
+        window.draw(button);
     }
     sf::RectangleShape indicator({548, 96});
     indicator.setFillColor(sf::Color{255, 255, 255, 80});
     indicator.setPosition({360.f, 200.f + 120.f * static_cast<float>(currentButton_)});
-    renderer.drawSFML(indicator);
+    window.draw(indicator);
+    fpsCounter_.draw(window);
 }
 
-void MenuScene::update()
+void MenuScene::doUpdate()
 {
+    fpsCounter_.update();
 }
 
-#include <iostream>
-
-void MenuScene::handleEvents(sf::RenderWindow& window)
+bool MenuScene::doHandleEvents(sf::RenderWindow& window)
 {
+    bool isRunning = true;
     sf::Event event{};
     while (window.pollEvent(event))
     {
@@ -47,7 +56,9 @@ void MenuScene::handleEvents(sf::RenderWindow& window)
                 {
                     switch (currentButton_)
                     {
-                        case 0: endScene(); break;
+                        case 0:
+                            isRunning = false;
+                            break;  // can it return here or does it have to poll all events?
                         case 2: window.close(); break;
                         default: break;
                     }
@@ -71,9 +82,10 @@ void MenuScene::handleEvents(sf::RenderWindow& window)
             }
         }
     }
+    return isRunning;
 }
 
-std::string_view MenuScene::nextScene() const
+SceneType MenuScene::nextScene() const
 {
-    return "GameScene";
+    return SceneType::GameScene;
 }

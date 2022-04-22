@@ -3,6 +3,7 @@
 #include "WorldMaker/States/PlacerFunction.hpp"
 #include "WorldMaker/States/RemovalFunction.hpp"
 
+#include <array>
 #include <iostream>
 
 FunctionManager::FunctionManager()
@@ -70,12 +71,13 @@ void FunctionManager::handleEvents(sf::RenderWindow& window)
 
 void FunctionManager::render(const RenderManager& renderer)
 {
-    sf::Vertex points[] = {sf::Vertex(sf::Vector2f(0, 140)), sf::Vertex(sf::Vector2f(0, 910))};
+    auto points = std::array{sf::Vertex(sf::Vector2f(0.f, 140.f)),
+                             sf::Vertex(sf::Vector2f(0.f, 910.f))};
     for (int i = 0; i < 40; i++)
     {
-        points[0].position.x = i * 35;
-        points[1].position.x = i * 35;
-        renderer.drawSFML(points, 2, sf::Lines);
+        points[0].position.x = i * 35.f;
+        points[1].position.x = i * 35.f;
+        renderer.drawSFML(points.data(), 2, sf::Lines);
     }
     points[0].position = {0, 140};
     points[1].position = {1260, 140};
@@ -83,7 +85,7 @@ void FunctionManager::render(const RenderManager& renderer)
     {
         points[0].position.y = i * 35;
         points[1].position.y = i * 35;
-        renderer.drawSFML(points, 2, sf::Lines);
+        renderer.drawSFML(points.data(), 2, sf::Lines);
     }
     for (const auto& item : buttons_)
     {
@@ -113,7 +115,7 @@ std::vector<Button>::const_iterator FunctionManager::detectButton(int posx, int 
 {
     for (auto iter = buttons_.begin(); iter != buttons_.end(); iter++)
     {
-        if (iter->getGlobalBounds().contains(posx, posy))
+        if (iter->getGlobalBounds().contains(sf::Vector2f(sf::Vector2i(posx, posy))))
         {
             return iter;
         }

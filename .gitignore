@@ -7,5 +7,11 @@ cmake-build-debug/
 /Docs/
 /Resources/temp/
 /cmake_modules/
+
+# VS Code
 .vscode
 build
+
+# Trunk extension
+.markdownlint.yaml
+.trunk/

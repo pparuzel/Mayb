@@ -1,44 +1,51 @@
 #include "Scenes/GameScene.hpp"
 
-GameScene::GameScene(const Config& config, const FPSCounter& fpsCounter)
-    : world_(config)
-    , counter_(fpsCounter)
+#include "Config.hpp"
+
+GameScene::GameScene(sf::RenderWindow& window)
+    : world_()
+    , counter_()
 {
+    auto& config = getConfig();
+    config.isVSyncEnabled = true;
+    config.fpsCap = 60;
+    config.reconfigureWindow(window);
 }
 
-void GameScene::update()
+void GameScene::doUpdate()
 {
-    if (not popUpMenu.isOpen())
+    if (!popUpMenu.isOpen())
     {
         world_.update(counter_.frametime());
     }
+}
+
+void GameScene::doRender(sf::RenderWindow& window)
+{
+    world_.render(window);
+    if (popUpMenu.isOpen())
+    {
+        popUpMenu.render(window);
+    }
+    // TODO: Possible HUD rendering here...
+}
+
+SceneType GameScene::nextScene() const
+{
+    return SceneType::MenuScene;
+}
+
+bool GameScene::doHandleEvents(sf::RenderWindow& window)
+{
+    bool isRunning = true;
     if (world_.isGameOver())
     {
-        endScene();
+        isRunning = false;
     }
-}
-
-void GameScene::render(const RenderManager& renderer)
-{
-    world_.render(renderer);
     if (popUpMenu.isOpen())
     {
-        popUpMenu.render(renderer);
-    }
-    // TODO Possible HUD rendering here...
-}
-
-std::string_view GameScene::nextScene() const
-{
-    return "MenuScene";
-}
-
-void GameScene::handleEvents(sf::RenderWindow& window)
-{
-    if (popUpMenu.isOpen())
-    {
-        popUpMenu.update(window, *this);
-        return;
+        popUpMenu.update(window, isRunning);
+        return isRunning;
     }
     sf::Event event{};
     while (window.pollEvent(event))
@@ -55,4 +62,5 @@ void GameScene::handleEvents(sf::RenderWindow& window)
             }
         }
     }
+    return isRunning;
 }

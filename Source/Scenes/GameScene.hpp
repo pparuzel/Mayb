@@ -10,19 +10,17 @@
 class GameScene : public Scene
 {
     World world_;
-    const FPSCounter& counter_;
+    FPSCounter counter_;
     PopUpMenu popUpMenu;
 
 public:
-    GameScene(const Config&, const FPSCounter&);
+    explicit GameScene(sf::RenderWindow& window);
+    SceneType nextScene() const override;
 
-    void update() override;
-
-    void render(const RenderManager& renderer) override;
-
-    std::string_view nextScene() const override;
-
-    void handleEvents(sf::RenderWindow& window) override;
+private:
+    void doUpdate() override;
+    void doRender(sf::RenderWindow& window) override;
+    bool doHandleEvents(sf::RenderWindow& window) override;
 };
 
 #endif  // MAYBSFML_GAMESCENE_HPP

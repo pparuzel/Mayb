@@ -2,7 +2,6 @@
 #define RESOURCEMANAGER_HPP
 
 #include <filesystem>
-#include <tuple>
 
 namespace std_fs = std::filesystem;
 

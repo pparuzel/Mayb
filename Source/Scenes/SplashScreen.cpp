@@ -9,13 +9,14 @@
 
 using namespace std::string_view_literals;
 
-SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
-    : fpsCounter_(fpsCounter)
+SplashScreen::SplashScreen(sf::RenderWindow& window)
+    : fpsCounter_()
     , counter_(0)
     , trans_(0)
     , direction_(1)
+    , isRunning_(true)
 {
-    constexpr static auto loadTexture = [](std::string_view resourceName)
+    static constexpr auto loadTexture = [] (std::string_view resourceName)
     {
         std_fs::path path = ResourceManager::getLocation() / "SplashScreen" / resourceName;
         sf::Texture texture;
@@ -25,7 +26,7 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
         }
         return texture;
     };
-    static const auto SplashScreenResourceInfo = std::array{
+    static constexpr auto SplashScreenResourceInfo = std::array{
         std::make_pair("splashscreen.png"sv, sf::Vector2f(400.f, 300.f)),
         std::make_pair("splashscreen2.png"sv, sf::Vector2f(1000.f, 700.f)),
         std::make_pair("xd.png"sv, sf::Vector2f(150.f, 150.f)),
@@ -39,31 +40,34 @@ SplashScreen::SplashScreen(const Config& config, const FPSCounter& fpsCounter)
     }
 }
 
-void SplashScreen::update()
+void SplashScreen::doUpdate()
 {
+    fpsCounter_.update();
     showLogo();
-    if ((trans_ < 5 and direction_ == -1))
+    if ((trans_ < 5 && direction_ == -1))
     {
-        endScene();
+        isRunning_ = false;
     }
 }
 
-void SplashScreen::render(const RenderManager& renderer)
+void SplashScreen::doRender(sf::RenderWindow& window)
 {
+    fpsCounter_.draw(window);
     sf::Uint8 alpha = 0;
     if (trans_ > 150)
+    {
         alpha = static_cast<sf::Uint8>(trans_ * 255.f / precision - 150);
-    sprites_[0].setColor(
-        sf::Color(255, 255, 255, static_cast<sf::Uint8>(trans_ * 255.f / precision)));
+    }
+    sprites_[0].setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(trans_ * 255.f / precision)));
     sprites_[1].setColor(sf::Color(255, 255, 255, alpha));
     sprites_[2].setColor(sf::Color(255, 255, 255, 0));
     if (direction_ == -1)
     {
         sprites_[2].setColor(sf::Color(255, 255, 255, alpha));
     }
-    for (const auto& sprite : sprites_)
+    for (auto& sprite : sprites_)
     {
-        renderer.loadSprite(sprite);
+        window.draw(sprite);
     }
 }
 
@@ -85,19 +89,21 @@ void SplashScreen::showLogo()
     }
 }
 
-std::string_view SplashScreen::nextScene() const
+SceneType SplashScreen::nextScene() const
 {
-    return "MenuScene";
+    return SceneType::MenuScene;
 }
 
-void SplashScreen::handleEvents(sf::RenderWindow& window)
+bool SplashScreen::doHandleEvents(sf::RenderWindow& window)
 {
     sf::Event event{};
     while (window.pollEvent(event))
     {
         if (event.type == event.KeyPressed)
         {
-            endScene();
+            isRunning_ = false;
+            return isRunning_;
         }
     }
+    return isRunning_;
 }

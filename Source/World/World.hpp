@@ -13,15 +13,11 @@ class World : public WorldLoader
     bool isGameOver_;
 
 public:
-    explicit World(const Config&);
-
+    explicit World();
     void update(float);
-
-    void render(const RenderManager&);
-
+    void render(sf::RenderWindow& window);
     void handleCollision();
-
-    bool isGameOver();
+    bool isGameOver() const;
 };
 
 #endif  // MAYBSFML_WORLD_HPP

@@ -1,10 +1,10 @@
 #include "Application.hpp"
-#include "WorldMaker/WorldMaker.hpp"
+// #include "WorldMaker/WorldMaker.hpp"
+#include "Config.hpp"
 
 int main()
 {
-    Config conf;
-    Application app(conf);
+    Application app{};
     // WorldMaker app(conf);
     app.run();
 }

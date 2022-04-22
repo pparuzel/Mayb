@@ -20,7 +20,7 @@ void PopUpMenu::toggle()
     isOpen_ = !isOpen_;
 }
 
-void PopUpMenu::update(sf::RenderWindow& window, Scene& parentScene)
+void PopUpMenu::update(sf::RenderWindow& window, bool& isRunning)
 {
     sf::Event event{};
     while (window.pollEvent(event))
@@ -37,7 +37,7 @@ void PopUpMenu::update(sf::RenderWindow& window, Scene& parentScene)
                 {
                     case 0: toggle(); break;
                     case 1: break;
-                    case 3: parentScene.endScene(); break;
+                    case 3: isRunning = false; break;
                     default: break;
                 }
             }
@@ -60,18 +60,18 @@ void PopUpMenu::update(sf::RenderWindow& window, Scene& parentScene)
     }
 }
 
-void PopUpMenu::render(const RenderManager& renderer)
+void PopUpMenu::render(sf::RenderWindow& window)
 {
     sf::RectangleShape rect({400, 570});
     rect.setFillColor(sf::Color{50, 100, 255, 50});
     rect.setPosition({430, 110});
-    renderer.drawSFML(rect);
+    window.draw(rect);
     for (const sf::Sprite& sprite : buttons_.sprites())
     {
-        renderer.drawSFML(sprite);
+        window.draw(sprite);
     }
     sf::RectangleShape indicator({380, 133});
     indicator.setFillColor(sf::Color{255, 255, 255, 80});
     indicator.setPosition({440.f, 120.f + 140.f * currentButton_});
-    renderer.drawSFML(indicator);
+    window.draw(indicator);
 }

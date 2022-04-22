@@ -2,7 +2,9 @@
 
 #include "Utils/ResourceManager.hpp"
 
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 
 FPSCounter::FPSCounter()
     : currentFrames_(0)
@@ -15,11 +17,12 @@ FPSCounter::FPSCounter()
     text_.setOutlineThickness(2);
     text_.setFont(font_);
     text_.setCharacterSize(25);
+
 }
 
 void FPSCounter::update()
 {
-    constexpr float slotTime = .5f;
+    static constexpr float slotTime = .5f;
     ++currentFrames_;
 
     if (fpsTimer_.getElapsedTime().asSeconds() > slotTime)
@@ -31,12 +34,12 @@ void FPSCounter::update()
     lastTick_ = tickTimer_.restart().asSeconds();
 }
 
-void FPSCounter::draw(const RenderManager& renderer)
+void FPSCounter::draw(sf::RenderWindow& window)
 {
     std::stringstream ss;
     ss << std::fixed << std::setprecision(2) << fps_;
     text_.setString("FPS: " + ss.str());
-    renderer.drawSFML(text_);
+    window.draw(text_);
 }
 
 float FPSCounter::frametime() const

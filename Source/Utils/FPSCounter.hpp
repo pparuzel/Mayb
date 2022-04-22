@@ -1,10 +1,7 @@
 #ifndef MAYBSFML_FPSCOUNTER_H
 #define MAYBSFML_FPSCOUNTER_H
 
-#include "../Rendering/RenderManager.hpp"
 #include <SFML/Graphics.hpp>
-#include <iomanip>
-#include <sstream>
 
 class FPSCounter
 {
@@ -17,10 +14,10 @@ class FPSCounter
     float lastTick_;
 
 public:
-    FPSCounter();
+    explicit FPSCounter();
 
     void update();
-    void draw(const RenderManager&);
+    void draw(sf::RenderWindow&);
     float frametime() const;
 };
 

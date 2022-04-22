@@ -17,14 +17,10 @@ class PopUpMenu
 
 public:
     explicit PopUpMenu();
-
     bool isOpen() const;
-
     void toggle();
-
-    void render(const RenderManager& renderer);
-
-    void update(sf::RenderWindow& window, Scene& parentScene);
+    void render(sf::RenderWindow& renderer);
+    void update(sf::RenderWindow& window, bool& isRunning);
 };
 
 #endif  // MAYBSFML_POPUPMENU_HPP

@@ -1,7 +1,7 @@
 #include "World.hpp"
 
-World::World(const Config& config)
-    : WorldLoader(config)
+World::World()
+    : WorldLoader()
     , player_(nullptr)
     , isGameOver_(false)
 {
@@ -19,33 +19,32 @@ void World::update(float frametime)
     }
 }
 
-void World::render(const RenderManager& renderer)
+void World::render(sf::RenderWindow& window)
 {
-    renderer.refresh(sf::Color{153, 204, 255});
+    window.clear(sf::Color{153, 204, 255});
     for (const std::shared_ptr<Block>& block : blocks_)
     {
-        renderer.drawBlock(*block);
+        window.draw(block->sprite());
     }
     for (const std::shared_ptr<Entity>& ent : entities_)
     {
-        renderer.drawEntity(*ent);
+        window.draw(ent->sprite());
     }
 }
 
 void World::handleCollision()
 {
-    CollisionType collType;
     for (std::shared_ptr<Entity>& ent : entities_)
     {
         for (const std::shared_ptr<Block>& block : blocks_)
         {
-            collType = ent->AABBox().detectRectCollision(block->AABBox(), ent->velocity());
+            CollisionType collType = ent->AABBox().detectRectCollision(block->AABBox(), ent->velocity());
             ent->resolveCollision(collType);
         }
     }
 }
 
-bool World::isGameOver()
+bool World::isGameOver() const
 {
     return isGameOver_;
 }

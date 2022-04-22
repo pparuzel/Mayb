@@ -6,8 +6,8 @@ WorldMaker::WorldMaker(const Config& config)
     , functionManager_()
 {
     window_.create(sf::VideoMode(config.width, config.height + 140), "Mayb2D World Maker");
-    window_.setFramerateLimit(config.fps_cap);
-    window_.setVerticalSyncEnabled(config.isVSyncOn);
+    window_.setFramerateLimit(config.fpsCap);
+    window_.setVerticalSyncEnabled(config.isVSyncEnabled);
 }
 
 void WorldMaker::run()
