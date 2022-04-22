@@ -4,7 +4,7 @@ project(MaybSFML)
 set(CMAKE_CXX_STANDARD 20)
 
 find_package(SFML 3.0 COMPONENTS system window graphics REQUIRED)
-set(DEVELOPER_MODE FALSE)
+option(DEVELOPER_MODE "Enable Developer Mode" OFF)
 
 set(ALL_FILES
     # Source Root
